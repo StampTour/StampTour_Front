@@ -1,0 +1,42 @@
+/*Titlefont*/
+@font-face {
+	font-family: "RixInooAriDuriR";
+	src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2207-01@1.0/RixInooAriDuriR.woff2")
+		format("woff2");
+}
+
+/*Mainfont*/
+@font-face {
+	font-family: "BMJUA";
+	src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff")
+		format("woff");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "S-CoreDream-3Light";
+	src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff")
+		format("woff");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "HakgyoansimWoojuR";
+	src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/HakgyoansimWoojuR.woff2")
+		format("woff2");
+	font-weight: normal;
+	font-style: normal;
+}
+.Titlefont {
+	font-family: "RixInooAriDuriR", sans-serif;
+}
+
+.Mainfont {
+	font-family: "BMJUA", sans-serif;
+}
+
+.Stampfont {
+	font-family: "HakgyoansimWoojuR", sans-serif;
+}

@@ -1,0 +1,41 @@
+.App {
+  max-width: 500px;
+  min-height: 100vh;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-x: hidden;
+  background-color: white;
+}
+
+.Home {
+  max-width: 500px;
+  min-height: 100vh;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-x: hidden;
+  background-color: white;
+}
+
+.Gwangjin {
+  max-width: 500px;
+  min-height: 100vh;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-x: hidden;
+  background-color: white;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.Titlefont {
+  -webkit-text-stroke: 3px #FE904C;
+  color: #FEFBF0;
+}
+
+#Camerabtn {
+  filter: drop-shadow(0px 0px 2px #FE9758);
+}
