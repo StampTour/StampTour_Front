@@ -1,4 +1,3 @@
-import React, {useState} from "react";
 import Cameraimg from "../../../img/Camera.png";
 import Robotimg from "../../../img/robot.png";
 
@@ -6,22 +5,22 @@ const Stampmain = () => {
 	const booths = [
 		{
 			id: 1,
-			name: "로봇",
+			name: "로봇 체험존",
 			src: Robotimg,
 		},
 		{
 			id: 2,
-			name: "드론",
+			name: "드론 체험존",
 			src: Cameraimg,
 		},
 		{
 			id: 3,
-			name: "AR",
-			src: {Robotimg},
+			name: "AR 체험존",
+			src: Robotimg,
 		},
 		{
 			id: 4,
-			name: "VR",
+			name: "VR 체험존",
 			src: "{Robotimg}",
 		},
 		{
@@ -60,12 +59,11 @@ const Stampmain = () => {
 		return (
 			<button
 				key={booth.id}
-				className='flex flex-col items-center justify-center bg-[white] w-full h-full'
+				className='flex flex-col items-center justify-center bg-[white] w-full h-full pt-[25px] pb-[15px]'
 			>
 				<img className='h-[50px]' src={booth.src} alt='' />
-				<div className='Stampfont flex flex-col items-center text-[15px] mt-[20px]'>
+				<div className='Stampfont flex flex-col items-center text-[15px] mt-[10px]'>
 					<span className=''>{booth.name}</span>
-					<span>체험존</span>
 				</div>
 			</button>
 		);
