@@ -7,66 +7,62 @@ const Stampmain = () => {
 		{
 			id: 1,
 			name: "로봇",
-			boothimg: "../../../img/robot.png",
+			src: Robotimg,
 		},
 		{
 			id: 2,
-			name: "테스트",
-			boothimg: "{Robotimg}",
+			name: "드론",
+			src: Cameraimg,
 		},
 		{
 			id: 3,
-			name: "로봇",
-			boothimg: "{Robotimg}",
+			name: "AR",
+			src: {Robotimg},
 		},
 		{
 			id: 4,
-			name: "로봇",
-			boothimg: "{Robotimg}",
+			name: "VR",
+			src: "{Robotimg}",
 		},
 		{
 			id: 5,
-			name: "로봇",
-			boothimg: "{Robotimg}",
+			name: "XR",
+			src: "{Robotimg}",
 		},
 		{
 			id: 6,
 			name: "로봇",
-			boothimg: "{Robotimg}",
+			src: "{Robotimg}",
 		},
 		{
 			id: 7,
 			name: "로봇",
-			boothimg: "{Robotimg}",
+			src: "{Robotimg}",
 		},
 		{
 			id: 8,
 			name: "로봇",
-			boothimg: "{Robotimg}",
+			src: "{Robotimg}",
 		},
 		{
 			id: 9,
 			name: "로봇",
-			boothimg: "{Robotimg}",
+			src: "{Robotimg}",
 		},
 		{
 			id: 10,
 			name: "로봇",
-			boothimg: "{Robotimg}",
+			src: "{Robotimg}",
 		},
 	];
 
 	const newBooth = booths.map((booth) => {
 		return (
 			<button
-				id={booth.id}
+				key={booth.id}
 				className='flex flex-col items-center justify-center bg-[white] w-full h-full'
 			>
-				<img
-					className='h-[50px]'
-					src={booth.boothimg}
-					alt=''
-				/>
+				<img className='h-[50px]' src={booth.src} alt='' />
 				<div className='Stampfont flex flex-col items-center text-[15px] mt-[20px]'>
 					<span className=''>{booth.name}</span>
 					<span>체험존</span>

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import Header from "../component/Gwangjin/article/Header";
 import Stampmain from "../component/Gwangjin/article/Stampmain";
 import Qrscanner from "../component/Gwangjin/article/Qrscanner";
