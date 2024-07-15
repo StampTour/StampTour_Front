@@ -3,8 +3,43 @@
 @tailwind utilities;
 
 body {
-  margin: 0;
-  padding: 0;
-  background-color: white;
+	margin: 0;
+	padding: 0;
+	background-color: white;
 }
 
+.App {
+	max-width: 500px;
+	min-height: 100vh;
+	margin-left: auto;
+	margin-right: auto;
+	overflow-x: hidden;
+	background-color: white;
+}
+
+.Home {
+	max-width: 500px;
+	min-height: 100vh;
+	margin-left: auto;
+	margin-right: auto;
+	overflow-x: hidden;
+	background-color: white;
+}
+
+.Gwangjin {
+	max-width: 500px;
+	min-height: 100vh;
+	margin-left: auto;
+	margin-right: auto;
+	overflow-x: hidden;
+	background-color: white;
+}
+
+.Titlefont {
+	-webkit-text-stroke: 3px #fe904c;
+	color: #fefbf0;
+}
+
+#Camerabtn {
+	filter: drop-shadow(0px 0px 2px #fe9758);
+}

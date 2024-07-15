@@ -1,57 +1,65 @@
-import Cameraimg from "../../../img/Camera.png";
-import Robotimg from "../../../img/robot.png";
+import Before_Robot_X from "../../../img/Before_Robot_X.svg";
+import Before_Drone_X from "../../../img/Before_Drone_X.svg";
+import Before_AR_X from "../../../img/Before_AR_X.svg";
+import Before_VR_X from "../../../img/Before_VR_X.svg";
+import Before_Car_X from "../../../img/Before_Car_X.svg";
+import After_Robot_O from "../../../img/After_Robot_O.svg";
+import After_Drone_O from "../../../img/After_Drone_O.svg";
+import After_AR_O from "../../../img/After_Ar_O.svg";
+import After_VR_O from "../../../img/After_Vr_O.svg";
+import After_Car_O from "../../../img/After_Car_O.svg";
 
 const Stampmain = () => {
 	const booths = [
 		{
 			id: 1,
 			name: "로봇 체험존",
-			src: Robotimg,
+			src: Before_Robot_X,
 		},
 		{
 			id: 2,
 			name: "드론 체험존",
-			src: Cameraimg,
+			src: Before_Drone_X,
 		},
 		{
 			id: 3,
 			name: "AR 체험존",
-			src: Robotimg,
+			src: Before_AR_X,
 		},
 		{
 			id: 4,
 			name: "VR 체험존",
-			src: "{Robotimg}",
+			src: Before_VR_X,
 		},
 		{
 			id: 5,
-			name: "XR",
-			src: "{Robotimg}",
+			name: "자율주행 체험존",
+			src: Before_Car_X,
 		},
 		{
 			id: 6,
 			name: "로봇",
-			src: "{Robotimg}",
+			src: After_Robot_O,
 		},
 		{
 			id: 7,
 			name: "로봇",
-			src: "{Robotimg}",
+			src: After_Drone_O,
 		},
 		{
 			id: 8,
 			name: "로봇",
-			src: "{Robotimg}",
+			src: After_AR_O,
 		},
 		{
 			id: 9,
 			name: "로봇",
-			src: "{Robotimg}",
+			src: After_VR_O,
 		},
 		{
 			id: 10,
 			name: "로봇",
-			src: "{Robotimg}",
+			src: After_Car_O,
 		},
 	];
 
@@ -61,8 +69,8 @@ const Stampmain = () => {
 				key={booth.id}
 				className='flex flex-col items-center justify-center bg-[white] w-full h-full pt-[25px] pb-[15px]'
 			>
-				<img className='h-[50px]' src={booth.src} alt='' />
-				<div className='Stampfont flex flex-col items-center text-[15px] mt-[10px]'>
+				<img className='w-[130px]' src={booth.src} alt='' />
+				<div className='Stampfont flex flex-col items-center text-[16px] mt-[10px]'>
 					<span className=''>{booth.name}</span>
 				</div>
 			</button>

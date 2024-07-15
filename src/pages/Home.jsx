@@ -13,6 +13,7 @@ const Home = () => {
 			>
 				광진구 스탬프투어로 이동
 			</Link>
+			<Link to='/Login'>로그인</Link>
 		</div>
 	);
 };
