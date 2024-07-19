@@ -23,14 +23,16 @@ const Login = () => {
 		e.preventDefault(); // 폼의 기본 동작을 막음
 		try {
 			const response = await axios.post(
-				"http://35.216.73.103:8080/api/login", // URL 수정
+				"https://jsonplaceholder.typicode.com/posts", // URL 수정
 				{
 					userid: userid,
 				}
 			);
 			console.log("백엔드에 잘 보냄", response.data);
+
+			console.log("userId", userid);
 			// 백엔드에 잘 보내졌으면 실행되는 코드
-			if (response.data.length > 0) {
+			if (response.data.userid.length > 0) {
 				navigate("/Gwangjin"); // navigate에 경로 문자열 사용
 			}
 		} catch (error) {
