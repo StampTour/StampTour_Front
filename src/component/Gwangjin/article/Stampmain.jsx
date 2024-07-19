@@ -8,6 +8,8 @@ import After_Drone_O from "../../../img/After_Drone_O.svg";
 import After_AR_O from "../../../img/After_Ar_O.svg";
 import After_VR_O from "../../../img/After_Vr_O.svg";
 import After_Car_O from "../../../img/After_Car_O.svg";
+import {useState} from "react";
+import BoothInfo from "../article/BoothInfo";
 
 const Stampmain = () => {
 	const booths = [
@@ -63,12 +65,25 @@ const Stampmain = () => {
 		},
 	];
 
+	const [visible, setVisible] = useState(false);
+	const [selectedBoothId, setSelectedBoothId] =
+		useState(null);
+
+	const handleClick = (boothId) => {
+		setSelectedBoothId(boothId);
+		setVisible(!visible);
+	};
+
 	const newBooth = booths.map((booth) => {
 		return (
 			<button
+				onClick={() => handleClick(booth.id)}
 				key={booth.id}
-				className='flex flex-col items-center justify-center bg-[white] w-full h-full pt-[25px] pb-[15px]'
+				className='relative flex flex-col items-center justify-center bg-[white] w-full h-full pt-[25px] pb-[15px]'
 			>
+				{visible && selectedBoothId === booth.id && (
+					<BoothInfo boothid={booth.id} />
+				)}
 				<img className='w-[130px]' src={booth.src} alt='' />
 				<div className='Stampfont flex flex-col items-center text-[16px] mt-[10px]'>
 					<span className=''>{booth.name}</span>
