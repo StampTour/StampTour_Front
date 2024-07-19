@@ -45,7 +45,7 @@ const Login = () => {
 		<div className=''>
 			<div
 				id='header'
-				className='pt-[30px] pb-[10px] bg-[#bfeefe] drop-shadow'
+				className='pt-[30px] pb-[10px] bg-[#bfeefe]'
 			>
 				<div className='Titlefont flex flex-col items-center text-[45px] drop-shadow-lg'>
 					<span className=''>체험존</span>
