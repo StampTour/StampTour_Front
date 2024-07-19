@@ -29,9 +29,8 @@ const Login = () => {
 				}
 			);
 			console.log("백엔드에 잘 보냄", response.data);
-
-			console.log("userId", userid);
 			// 백엔드에 잘 보내졌으면 실행되는 코드
+
 			if (response.data.userid.length > 0) {
 				navigate("/Gwangjin"); // navigate에 경로 문자열 사용
 			}

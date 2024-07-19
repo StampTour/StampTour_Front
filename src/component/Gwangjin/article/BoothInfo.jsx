@@ -59,7 +59,7 @@ export default function BoothInfo({boothid}) {
 	);
 
 	return (
-		<div className='absolute flex flex-col items-center w-[150px] bg-[#fefbf0] rounded-[10px]  border-[2px] border-[#fe904c] py-[10px] drop-shadow-md'>
+		<div className='absolute flex flex-col items-center w-[150px] bg-[#fefbf0] rounded-[10px]  border-[2px] border-[#fe904c] py-[10px]'>
 			<div className=' text-[16px] text-[#FE8134] mb-[3px]'>
 				{boothInfo?.name}
 			</div>
