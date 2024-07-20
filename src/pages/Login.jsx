@@ -23,7 +23,7 @@ const Login = () => {
 		e.preventDefault(); // 폼의 기본 동작을 막음
 		try {
 			const response = await axios.post(
-				"https://jsonplaceholder.typicode.com/posts", // URL 수정
+				"http://3.37.235.177:8080/api/login", // URL 수정
 				{
 					userid: userid,
 				}
@@ -36,7 +36,6 @@ const Login = () => {
 			}
 		} catch (error) {
 			console.error("오류", error);
-			console.log("실패");
 			alert("전송실패");
 		}
 	};
