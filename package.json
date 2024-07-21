@@ -43,6 +43,5 @@
 	"devDependencies": {
 		"postcss-loader": "^8.1.1",
 		"tailwindcss": "^3.4.4"
-	},
-	"proxy": "http://localhost:3000/"
+	}
 }

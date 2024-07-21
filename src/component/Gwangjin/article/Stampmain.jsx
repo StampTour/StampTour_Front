@@ -3,12 +3,13 @@ import Before_Drone_X from "../../../img/Before_Drone_X.svg";
 import Before_AR_X from "../../../img/Before_AR_X.svg";
 import Before_VR_X from "../../../img/Before_VR_X.svg";
 import Before_Car_X from "../../../img/Before_Car_X.svg";
-import After_Robot_O from "../../../img/After_Robot_O.svg";
-import After_Drone_O from "../../../img/After_Drone_O.svg";
-import After_AR_O from "../../../img/After_Ar_O.svg";
-import After_VR_O from "../../../img/After_Vr_O.svg";
-import After_Car_O from "../../../img/After_Car_O.svg";
-import {useState} from "react";
+// import After_Robot_O from "../../../img/After_Robot_O.svg";
+// import After_Drone_O from "../../../img/After_Drone_O.svg";
+// import After_AR_O from "../../../img/After_AR_O.svg";
+// import After_VR_O from "../../../img/After_VR_O.svg";
+// import After_Car_O from "../../../img/After_Car_O.svg";
+import {useState, useEffect} from "react";
+import {useLocation} from "react-router-dom";
 import BoothInfo from "../article/BoothInfo";
 
 const Stampmain = () => {
@@ -16,58 +17,61 @@ const Stampmain = () => {
 		{
 			id: 1,
 			name: "로봇 체험존",
-			src: Before_Robot_X,
+			beforeSrc: Before_Robot_X,
+			afterSrc: <></>,
 		},
 		{
 			id: 2,
 			name: "드론 체험존",
-			src: Before_Drone_X,
+			beforeSrc: Before_Drone_X,
+			afterSrc: <></>,
 		},
 		{
 			id: 3,
 			name: "AR 체험존",
-			src: Before_AR_X,
+			beforeSrc: Before_AR_X,
+			afterSrc: <></>,
 		},
 		{
 			id: 4,
 			name: "VR 체험존",
-			src: Before_VR_X,
+			beforeSrc: Before_VR_X,
+			afterSrc: <></>,
 		},
 		{
 			id: 5,
 			name: "자율주행 체험존",
-			src: Before_Car_X,
-		},
-		{
-			id: 6,
-			name: "로봇",
-			src: After_Robot_O,
-		},
-		{
-			id: 7,
-			name: "로봇",
-			src: After_Drone_O,
-		},
-		{
-			id: 8,
-			name: "로봇",
-			src: After_AR_O,
-		},
-		{
-			id: 9,
-			name: "로봇",
-			src: After_VR_O,
-		},
-		{
-			id: 10,
-			name: "로봇",
-			src: After_Car_O,
+			beforeSrc: Before_Car_X,
+			afterSrc: <></>,
 		},
 	];
 
 	const [visible, setVisible] = useState(false);
 	const [selectedBoothId, setSelectedBoothId] =
 		useState(null);
+	const [stampedBooths, setStampedBooths] = useState([]);
+
+	const location = useLocation();
+
+	useEffect(() => {
+		const searchParams = new URLSearchParams(
+			location.search
+		);
+		const stampedId = searchParams.get("stampedId");
+		if (stampedId) {
+			const id = parseInt(stampedId, 10);
+			setStampedBooths((prev) => [...prev, id]);
+
+			// 스탬프 상태를 백엔드에 저장
+			fetch("/api/save-stamp", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({id}),
+			});
+		}
+	}, [location]);
 
 	const handleClick = (boothId) => {
 		setSelectedBoothId(boothId);
@@ -75,6 +79,11 @@ const Stampmain = () => {
 	};
 
 	const newBooth = booths.map((booth) => {
+		const isStamped = stampedBooths.includes(booth.id);
+		const src = isStamped
+			? booth.afterSrc
+			: booth.beforeSrc;
+
 		return (
 			<button
 				onClick={() => handleClick(booth.id)}
@@ -84,7 +93,7 @@ const Stampmain = () => {
 				{visible && selectedBoothId === booth.id && (
 					<BoothInfo boothid={booth.id} />
 				)}
-				<img className='w-[130px]' src={booth.src} alt='' />
+				<img className='w-[130px]' src={src} alt='' />
 				<div className='Stampfont flex flex-col items-center text-[16px] mt-[10px]'>
 					<span className=''>{booth.name}</span>
 				</div>

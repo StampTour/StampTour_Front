@@ -23,9 +23,9 @@ const Login = () => {
 		e.preventDefault(); // 폼의 기본 동작을 막음
 		try {
 			const response = await axios.post(
-				"http://3.37.235.177:8080/api/login", // URL 수정
+				"https://dm4buye7dda55.cloudfront.net/api/login", // URL 수정
 				{
-					userid: userid,
+					password: userid,
 				}
 			);
 			console.log("백엔드에 잘 보냄", response.data);
@@ -41,16 +41,13 @@ const Login = () => {
 	};
 
 	return (
-		<div className=''>
-			<div
-				id='header'
-				className='pt-[30px] pb-[10px] bg-[#bfeefe]'
-			>
-				<div className='Titlefont flex flex-col items-center text-[45px] drop-shadow-lg'>
+		<div className='h-screen flex items-center justify-center bg-[#bfeefe]'>
+			<div id='header' className='pt-[30px] pb-[10px] '>
+				<div className='Titlefont flex flex-col items-center text-[45px] pb-[30px] drop-shadow-lg'>
 					<span className=''>체험존</span>
 					<span className=''>스탬프 투어</span>
 				</div>
-				<div className='flex flex-row justify-center my-[20px]'>
+				<div className='flex flex-row justify-center my-[20px] pb-[10px]'>
 					<div className='Stampfont flex flex-col items-center text-[15px] text-[black]'>
 						<span className='mb-[3px]'>
 							반갑습니다! 스탬프 투어에 오신걸 환영해요🥰
