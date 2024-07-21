@@ -3,11 +3,11 @@ import axios from "axios";
 import {useNavigate} from "react-router-dom";
 
 const Login = () => {
-	const [userid, setUserid] = useState("");
+	const [password, setPassword] = useState("");
 	const navigate = useNavigate();
 
 	const getUserid = (e) => {
-		setUserid(e.target.value);
+		setPassword(e.target.value);
 		console.log(e.target.value);
 	};
 
@@ -23,9 +23,9 @@ const Login = () => {
 		e.preventDefault(); // 폼의 기본 동작을 막음
 		try {
 			const response = await axios.post(
-				"https://dm4buye7dda55.cloudfront.net/api/login", // URL 수정
+				"https://localhost:8080/api/login", // URL 수정
 				{
-					password: userid,
+					password: password,
 				}
 			);
 			console.log("백엔드에 잘 보냄", response.data);
@@ -72,7 +72,7 @@ const Login = () => {
 					<div className='flex flex-col items-center'>
 						<input
 							onChange={getUserid}
-							value={userid}
+							value={password}
 							className='w-[90%] bg-[#f9fafb] border-[1px] border-[#c2c8cf] rounded-[10px] mt-[12px] mb-[30px] px-[16px] py-[10px]'
 							placeholder='닉네임을 입력해주세요 !'
 							type='text'
