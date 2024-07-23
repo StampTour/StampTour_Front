@@ -23,7 +23,7 @@ const Login = () => {
 		e.preventDefault(); // 폼의 기본 동작을 막음
 		try {
 			const response = await axios.post(
-				"https://dm4buye7dda55.cloudfront.net/api/login", // URL 수정
+				"http://stamptour.xyz/api/login", // URL 수정
 				{
 					password: password,
 				}
