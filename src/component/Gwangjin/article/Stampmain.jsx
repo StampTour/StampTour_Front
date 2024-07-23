@@ -18,31 +18,31 @@ const Stampmain = () => {
 			id: 1,
 			name: "로봇 체험존",
 			beforeSrc: Before_Robot_X,
-			afterSrc: <></>,
+			// afterSrc: After_Robot_O,
 		},
 		{
 			id: 2,
 			name: "드론 체험존",
 			beforeSrc: Before_Drone_X,
-			afterSrc: <></>,
+			// afterSrc: After_Drone_O,
 		},
 		{
 			id: 3,
 			name: "AR 체험존",
 			beforeSrc: Before_AR_X,
-			afterSrc: <></>,
+			// afterSrc: After_AR_O,
 		},
 		{
 			id: 4,
 			name: "VR 체험존",
 			beforeSrc: Before_VR_X,
-			afterSrc: <></>,
+			// afterSrc: After_VR_O,
 		},
 		{
 			id: 5,
 			name: "자율주행 체험존",
 			beforeSrc: Before_Car_X,
-			afterSrc: <></>,
+			// afterSrc: After_Car_O,
 		},
 	];
 
