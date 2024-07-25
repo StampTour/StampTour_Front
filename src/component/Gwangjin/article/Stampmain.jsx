@@ -3,7 +3,6 @@ import Before_Drone_X from "../../../img/Before_Drone_X.svg";
 import Before_AR_X from "../../../img/Before_AR_X.svg";
 import Before_VR_X from "../../../img/Before_VR_X.svg";
 import Before_Car_X from "../../../img/Before_Car_X.svg";
-import After_AR_O from "../../../img/After_AR_O.svg";
 import After_Car_O from "../../../img/After_Car_O.svg";
 import After_Drone_O from "../../../img/After_Drone_O.svg";
 import After_Robot_O from "../../../img/After_Robot_O.svg";
@@ -30,7 +29,7 @@ const Stampmain = () => {
 			id: 3,
 			name: "AR 체험존",
 			beforeSrc: Before_AR_X,
-			afterSrc: After_AR_O,
+			afterSrc: After_Drone_O,
 		},
 		{
 			id: 4,
