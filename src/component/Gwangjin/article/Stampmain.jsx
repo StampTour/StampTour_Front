@@ -3,11 +3,11 @@ import Before_Drone_X from "../../../img/Before_Drone_X.svg";
 import Before_AR_X from "../../../img/Before_AR_X.svg";
 import Before_VR_X from "../../../img/Before_VR_X.svg";
 import Before_Car_X from "../../../img/Before_Car_X.svg";
-// import After_Robot_O from "../../../img/After_Robot_O.svg";
-// import After_Drone_O from "../../../img/After_Drone_O.svg";
-// import After_AR_O from "../../../img/After_AR_O.svg";
-// import After_VR_O from "../../../img/After_VR_O.svg";
-// import After_Car_O from "../../../img/After_Car_O.svg";
+import After_AR_O from "../../../img/After_AR_O.svg";
+import After_Car_O from "../../../img/After_Car_O.svg";
+import After_Drone_O from "../../../img/After_Drone_O.svg";
+import After_Robot_O from "../../../img/After_Robot_O.svg";
+import After_VR_O from "../../../img/After_Vr_O.svg";
 import {useState, useEffect} from "react";
 import {useLocation} from "react-router-dom";
 import BoothInfo from "../article/BoothInfo";
@@ -18,31 +18,31 @@ const Stampmain = () => {
 			id: 1,
 			name: "로봇 체험존",
 			beforeSrc: Before_Robot_X,
-			// afterSrc: After_Robot_O,
+			afterSrc: After_Robot_O,
 		},
 		{
 			id: 2,
 			name: "드론 체험존",
 			beforeSrc: Before_Drone_X,
-			// afterSrc: After_Drone_O,
+			afterSrc: After_Drone_O,
 		},
 		{
 			id: 3,
 			name: "AR 체험존",
 			beforeSrc: Before_AR_X,
-			// afterSrc: After_AR_O,
+			afterSrc: After_AR_O,
 		},
 		{
 			id: 4,
 			name: "VR 체험존",
 			beforeSrc: Before_VR_X,
-			// afterSrc: After_VR_O,
+			afterSrc: After_VR_O,
 		},
 		{
 			id: 5,
 			name: "자율주행 체험존",
 			beforeSrc: Before_Car_X,
-			// afterSrc: After_Car_O,
+			afterSrc: After_Car_O,
 		},
 	];
 
@@ -60,18 +60,20 @@ const Stampmain = () => {
 		const stampedId = searchParams.get("stampedId");
 		if (stampedId) {
 			const id = parseInt(stampedId, 10);
-			setStampedBooths((prev) => [...prev, id]);
+			if (!stampedBooths.includes(id)) {
+				setStampedBooths((prev) => [...prev, id]);
 
-			// 스탬프 상태를 백엔드에 저장
-			fetch("/api/save-stamp", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({id}),
-			});
+				// 스탬프 상태를 백엔드에 저장
+				fetch("/api/save-stamp", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({id}),
+				});
+			}
 		}
-	}, [location]);
+	}, [location, stampedBooths]);
 
 	const handleClick = (boothId) => {
 		setSelectedBoothId(boothId);
