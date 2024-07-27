@@ -1,8 +1,10 @@
 import React, {useState} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import {useCookies} from "react-cookie";
 
 const Login = () => {
+	const [cookies, setCookies] = useCookies(["cookie"]);
 	const [userid, setUserid] = useState("");
 	const navigate = useNavigate();
 
@@ -28,11 +30,12 @@ const Login = () => {
 					userid: userid,
 				}
 			);
-			if (
-				response.data &&
-				response.data.userid &&
-				response.data.userid.length > 0
-			) {
+			if (response.data.userid.length > 0) {
+				localStorage.setItem(
+					"session",
+					response.data.userid
+				);
+				// 노은아 userid
 				console.log("Navigating to /Gwangjin");
 				console.log("백엔드에 잘 보냄", response.data);
 				navigate("/Gwangjin");
