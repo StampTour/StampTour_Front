@@ -82,7 +82,7 @@ const Login = () => {
 							onChange={getUserid}
 							value={userid}
 							className='w-[90%] bg-[#f9fafb] border-[1px] border-[#c2c8cf] rounded-[10px] mt-[12px] mb-[30px] px-[16px] py-[10px]'
-							placeholder='비밀번호를 입력해주세요 !'
+							placeholder='닉네임을 입력해주세요 !'
 							type='text'
 							required
 						/>
