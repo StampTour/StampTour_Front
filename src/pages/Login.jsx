@@ -1,8 +1,10 @@
 import React, {useState} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import {useCookies} from "react-cookie";
 
 const Login = () => {
+	const [cookies, setCookies] = useCookies(["cookie"]);
 	const [userid, setUserid] = useState("");
 	const navigate = useNavigate();
 
@@ -29,6 +31,9 @@ const Login = () => {
 				}
 			);
 			if (response.data.userid.length > 0) {
+				setCookies("cookie", response.data.userid, {
+					path: "/",
+				});
 				localStorage.setItem(
 					"session",
 					response.data.userid
