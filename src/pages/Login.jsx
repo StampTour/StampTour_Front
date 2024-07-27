@@ -4,7 +4,7 @@ import {useNavigate} from "react-router-dom";
 import {useCookies} from "react-cookie";
 
 const Login = () => {
-	const [cookies, setCookies] = useCookies(["cookie"]);
+	const [, setCookies] = useCookies(["cookie"]);
 	const [userid, setUserid] = useState("");
 	const navigate = useNavigate();
 
