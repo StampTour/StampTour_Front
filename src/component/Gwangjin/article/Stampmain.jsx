@@ -10,6 +10,7 @@ import After_VR_O from "../../../img/After_Vr_O.svg";
 import {useState, useEffect} from "react";
 import {useLocation} from "react-router-dom";
 import BoothInfo from "../article/BoothInfo";
+import axios from "axios";
 
 const Stampmain = () => {
 	const booths = [
@@ -63,13 +64,7 @@ const Stampmain = () => {
 				setStampedBooths((prev) => [...prev, id]);
 
 				// 스탬프 상태를 백엔드에 저장
-				fetch("/api/save-stamp", {
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json",
-					},
-					body: JSON.stringify({id}),
-				});
+				axios.post("/api/save-stamp", {id});
 			}
 		}
 	}, [location, stampedBooths]);
