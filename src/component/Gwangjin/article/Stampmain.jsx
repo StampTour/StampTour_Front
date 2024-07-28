@@ -1,3 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import {useState, useEffect} from "react";
+import {useLocation, useNavigate} from "react-router-dom";
+
+// img
 import Before_Robot_X from "../../../img/Before_Robot_X.svg";
 import Before_Drone_X from "../../../img/Before_Drone_X.svg";
 import Before_AR_X from "../../../img/Before_AR_X.svg";
@@ -7,11 +12,17 @@ import After_Car_O from "../../../img/After_Car_O.svg";
 import After_Drone_O from "../../../img/After_Drone_O.svg";
 import After_Robot_O from "../../../img/After_Robot_O.svg";
 import After_VR_O from "../../../img/After_Vr_O.svg";
-import {useState, useEffect} from "react";
-import {useLocation, useNavigate} from "react-router-dom";
+
+// library
 import axios from "axios";
+
+// constants
 import BoothInfo from "../article/BoothInfo";
+
+// apis
+import {getUserInfo} from "../../../apis/main";
 const Stampmain = () => {
+	const token = localStorage.getItem("token");
 	const booths = [
 		{
 			id: 1,
@@ -48,21 +59,32 @@ const Stampmain = () => {
 	const [visible, setVisible] = useState(false);
 	const [selectedBoothId, setSelectedBoothId] =
 		useState(null);
+
 	const [stampedBooths, setStampedBooths] = useState([]);
 	const location = useLocation();
 	const navigate = useNavigate();
 
-	useEffect(() => {
-		const token = localStorage.getItem("token");
+	const getData = async () => {
+		try {
+			const res = await getUserInfo();
+			console.log(res);
+		} catch (e) {
+			console.log("get data error : ", e);
+		}
+	};
 
+	useEffect(() => {
 		if (!token) {
 			navigate("/");
 			return;
 		}
 
+		getData();
+
 		const searchParams = new URLSearchParams(
 			location.search
 		);
+
 		const stampedId = searchParams.get("stampedId");
 
 		if (stampedId) {

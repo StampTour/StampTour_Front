@@ -18,7 +18,12 @@ const Login = () => {
 			const response = await axios.post(
 				"https://stamptour.xyz/api/login",
 				{
-					userid: userid,
+					userRequest: {
+						userid: userid,
+					},
+					stampRequest: {
+						id: null,
+					},
 				}
 			);
 			if (response.data.token) {
