@@ -128,8 +128,8 @@ const Stampmain = () => {
 			if (!stampedBooths.includes(id)) {
 				setStampedBooths((prev) => [...prev, id]);
 
-				setBoolean(() => {
-					let newArray = [...boolean];
+				setBoolean((prevBoolean) => {
+					let newArray = [...prevBoolean];
 					newArray[id - 1] = true; // 인덱스는 0부터 시작하므로 id-1 사용
 					return newArray;
 				});
@@ -144,17 +144,18 @@ const Stampmain = () => {
 		setVisible(!visible);
 	};
 
+	useEffect(() => {
+		console.log("boolean: ", boolean);
+		console.log("userData: ", userData);
+		console.log("stampedBooths: ", stampedBooths);
+	}, [boolean, userData]);
+
 	const newBooth = booths.map((booth) => {
 		const isStamped = boolean[booth.id - 1]; // boolean 배열을 사용하여 상태 확인
 		const src = isStamped
 			? booth.afterSrc
 			: booth.beforeSrc;
 		// console.log("newBooth:", newBooth);
-
-		useEffect(() => {
-			console.log("boolean: ", boolean);
-			console.log("userData: ", userData);
-		}, [boolean, userData]);
 
 		return (
 			<button
