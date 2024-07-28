@@ -20,7 +20,7 @@ import axios from "axios";
 import BoothInfo from "../article/BoothInfo";
 
 // apis
-import {getUserInfo} from "../../../apis/main";
+import {getUserInfo, saveQRdata} from "../../../apis/main";
 const Stampmain = () => {
 	const token = localStorage.getItem("token");
 	const booths = [
@@ -73,6 +73,15 @@ const Stampmain = () => {
 		}
 	};
 
+	const saveQRData = async (id) => {
+		try {
+			const res = await saveQRdata(id);
+			console.log(res);
+		} catch (e) {
+			console.log("qr save error : ", e);
+		}
+	};
+
 	useEffect(() => {
 		if (!token) {
 			navigate("/");
@@ -92,15 +101,7 @@ const Stampmain = () => {
 			if (!stampedBooths.includes(id)) {
 				setStampedBooths((prev) => [...prev, id]);
 
-				axios.post(
-					"/api/save-stamp",
-					{id},
-					{
-						headers: {
-							Authorization: `Bearer ${token}`,
-						},
-					}
-				);
+				saveQRData(id);
 			}
 		}
 	}, [location, stampedBooths, navigate]);
