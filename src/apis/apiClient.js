@@ -6,7 +6,7 @@ const cookies = new Cookies();
 
 const apiClient = axios.create({
 	baseURL: config.API_URL,
-	timeout: 5000,
+	timeout: 2000,
 });
 
 apiClient.interceptors.request.use(async (config) => {

@@ -1,6 +1,11 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react-hooks/exhaustive-deps */
 import {useState, useEffect} from "react";
-import {useLocation, useNavigate} from "react-router-dom";
+import {
+	useLocation,
+	useNavigate,
+	useSearchParams,
+} from "react-router-dom";
 
 // img
 import Before_Robot_X from "../../../img/Before_Robot_X.svg";
@@ -20,6 +25,8 @@ import BoothInfo from "../article/BoothInfo";
 // apis
 import {getUserInfo, saveQRdata} from "../../../apis/main";
 const Stampmain = () => {
+	const [searchParams] = useSearchParams();
+	const stampedId = searchParams.get("stampedId");
 	const token = localStorage.getItem("token");
 	const booths = [
 		{
@@ -58,6 +65,11 @@ const Stampmain = () => {
 	const [selectedBoothId, setSelectedBoothId] =
 		useState(null);
 
+	const [boolean, setBoolean] = useState(
+		new Array(10).fill(false)
+	);
+	const [userData, setUserData] = useState();
+
 	const [stampedBooths, setStampedBooths] = useState([]);
 	const location = useLocation();
 	const navigate = useNavigate();
@@ -65,7 +77,32 @@ const Stampmain = () => {
 	const getData = async () => {
 		try {
 			const res = await getUserInfo();
-			console.log(res);
+			console.log("유저 데이터 가져오기 성공: ", res.data);
+
+			if (res.status === 200) {
+				setUserData(res.data);
+				const qrArray = new Array(10).fill(false);
+
+				// qr 값 탐색 후 배열에 저장
+				Object.keys(res.data).forEach((key) => {
+					if (
+						key.startsWith("qr") &&
+						res.data[key] === true
+					) {
+						const index =
+							parseInt(key.replace("qr", "")) - 1; // qr1 -> index 0
+						if (
+							!isNaN(index) &&
+							index >= 0 &&
+							index < qrArray.length
+						) {
+							qrArray[index] = true;
+						}
+					}
+				});
+
+				setBoolean(qrArray);
+			}
 		} catch (e) {
 			console.log("get data error : ", e);
 		}
@@ -74,7 +111,7 @@ const Stampmain = () => {
 	const saveQRData = async (id) => {
 		try {
 			const res = await saveQRdata(id);
-			console.log(res);
+			console.log("QR 저장 성공!!!!: ", res.data);
 		} catch (e) {
 			console.log("qr save error : ", e);
 		}
@@ -88,21 +125,21 @@ const Stampmain = () => {
 
 		getData();
 
-		const searchParams = new URLSearchParams(
-			location.search
-		);
-
-		const stampedId = searchParams.get("stampedId");
-
 		if (stampedId) {
 			const id = parseInt(stampedId, 10);
 			if (!stampedBooths.includes(id)) {
 				setStampedBooths((prev) => [...prev, id]);
 
-				saveQRData(id);
+				setBoolean(() => {
+					let newArray = [...boolean];
+					newArray[id - 1] = true; // 인덱스는 0부터 시작하므로 id-1 사용
+					return newArray;
+				});
+
+				saveQRData(stampedId);
 			}
 		}
-	}, [location, stampedBooths, navigate]);
+	}, []);
 
 	const handleClick = (boothId) => {
 		setSelectedBoothId(boothId);
@@ -110,10 +147,16 @@ const Stampmain = () => {
 	};
 
 	const newBooth = booths.map((booth) => {
-		const isStamped = stampedBooths.includes(booth.id);
+		const isStamped = boolean[booth.id - 1]; // boolean 배열을 사용하여 상태 확인
 		const src = isStamped
 			? booth.afterSrc
 			: booth.beforeSrc;
+		// console.log("newBooth:", newBooth);
+
+		useEffect(() => {
+			console.log("boolean: ", boolean);
+			console.log("userData: ", userData);
+		}, [boolean, userData]);
 
 		return (
 			<button
