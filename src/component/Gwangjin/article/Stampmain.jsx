@@ -1,3 +1,6 @@
+import React, {useState, useEffect} from "react";
+import {useLocation, useNavigate} from "react-router-dom";
+import axios from "axios";
 import Before_Robot_X from "../../../img/Before_Robot_X.svg";
 import Before_Drone_X from "../../../img/Before_Drone_X.svg";
 import Before_AR_X from "../../../img/Before_AR_X.svg";
@@ -6,11 +9,8 @@ import Before_Car_X from "../../../img/Before_Car_X.svg";
 import After_Car_O from "../../../img/After_Car_O.svg";
 import After_Drone_O from "../../../img/After_Drone_O.svg";
 import After_Robot_O from "../../../img/After_Robot_O.svg";
-import After_VR_O from "../../../img/After_Vr_O.svg";
-import {useState, useEffect} from "react";
-import {useLocation} from "react-router-dom";
+import After_VR_O from "../../../img/After_VR_O.svg";
 import BoothInfo from "../article/BoothInfo";
-import axios from "axios";
 
 const Stampmain = () => {
 	const booths = [
@@ -50,15 +50,21 @@ const Stampmain = () => {
 	const [selectedBoothId, setSelectedBoothId] =
 		useState(null);
 	const [stampedBooths, setStampedBooths] = useState([]);
-
 	const location = useLocation();
+	const navigate = useNavigate();
 
 	useEffect(() => {
+		const token = localStorage.getItem("token");
+
+		if (!token) {
+			navigate("/login");
+			return;
+		}
+
 		const searchParams = new URLSearchParams(
 			location.search
 		);
 		const stampedId = searchParams.get("stampedId");
-		const token = localStorage.getItem("token");
 
 		if (stampedId) {
 			const id = parseInt(stampedId, 10);
@@ -76,7 +82,7 @@ const Stampmain = () => {
 				);
 			}
 		}
-	}, [location, stampedBooths]);
+	}, [location, stampedBooths, navigate]);
 
 	const handleClick = (boothId) => {
 		setSelectedBoothId(boothId);
