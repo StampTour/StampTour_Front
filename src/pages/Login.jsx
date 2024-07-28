@@ -4,46 +4,34 @@ import {useNavigate} from "react-router-dom";
 import {useCookies} from "react-cookie";
 
 const Login = () => {
-	const [, setCookies] = useCookies(["cookie"]);
+	const [, setCookies] = useCookies(["token"]);
 	const [userid, setUserid] = useState("");
 	const navigate = useNavigate();
 
 	const getUserid = (e) => {
 		setUserid(e.target.value);
-		console.log(e.target.value);
 	};
 
-	// const confirmMessage = () => {
-	// 	if (userid === User.id) {
-	// 		alert("로그인에 성공했습니다.");
-	// 	} else {
-	// 		alert("등록하지 않은 회원입니다. ");
-	// 	}
-	// };
-
 	const onSubmit = async (e) => {
-		e.preventDefault(); // 폼의 기본 동작을 막음
+		e.preventDefault();
 		try {
 			const response = await axios.post(
-				"https://stamptour.xyz/api/login", // URL 수정
+				"https://stamptour.xyz/api/login",
 				{
 					userid: userid,
 				}
 			);
-			if (response.data.userid.length > 0) {
-				setCookies("cookie", response.data.userid, {
+			if (response.data.token) {
+				setCookies("token", response.data.token, {
 					path: "/",
 				});
-				localStorage.setItem(
-					"session",
-					response.data.userid
-				);
-				// 노은아 userid
-				console.log("Navigating to /Gwangjin");
-				console.log("백엔드에 잘 보냄", response.data);
+				localStorage.setItem("token", response.data.token);
 				navigate("/Gwangjin");
 			} else {
-				console.log("조건이 충족되지 않음", response.data);
+				console.error(
+					"조건이 충족되지 않음",
+					response.data
+				);
 			}
 		} catch (error) {
 			console.error("오류", error);
@@ -82,7 +70,6 @@ const Login = () => {
 					</div>
 				</div>
 				<form className='Mainfont' onSubmit={onSubmit}>
-					{/* 로그인 form */}
 					<div className='flex flex-col items-center'>
 						<input
 							onChange={getUserid}

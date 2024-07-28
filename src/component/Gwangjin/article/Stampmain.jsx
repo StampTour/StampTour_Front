@@ -58,13 +58,22 @@ const Stampmain = () => {
 			location.search
 		);
 		const stampedId = searchParams.get("stampedId");
+		const token = localStorage.getItem("token");
+
 		if (stampedId) {
 			const id = parseInt(stampedId, 10);
 			if (!stampedBooths.includes(id)) {
 				setStampedBooths((prev) => [...prev, id]);
 
-				// 스탬프 상태를 백엔드에 저장
-				axios.post("/api/save-stamp", {id});
+				axios.post(
+					"/api/save-stamp",
+					{id},
+					{
+						headers: {
+							Authorization: `Bearer ${token}`,
+						},
+					}
+				);
 			}
 		}
 	}, [location, stampedBooths]);
