@@ -14,8 +14,6 @@ import After_Robot_O from "../../../img/After_Robot_O.svg";
 import After_VR_O from "../../../img/After_Vr_O.svg";
 
 // library
-import axios from "axios";
-
 // constants
 import BoothInfo from "../article/BoothInfo";
 
