@@ -107,6 +107,15 @@ const Stampmain = () => {
 		}
 	};
 
+	const saveQRData = async (id) => {
+		try {
+			const res = await saveQRdata(id);
+			console.log("QR 저장 성공!!!!: ", res.data);
+		} catch (e) {
+			console.log("qr save error : ", e);
+		}
+	};
+
 	const saveQRdata = async (id) => {
 		const token = localStorage.getItem("token");
 		try {
@@ -144,7 +153,7 @@ const Stampmain = () => {
 					return newArray;
 				});
 
-				saveQRdata(stampedId);
+				saveQRData(stampedId);
 			}
 		}
 	}, []);
