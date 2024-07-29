@@ -111,7 +111,7 @@ const Stampmain = () => {
 		const token = localStorage.getItem("token");
 		try {
 			const res = await axios.post(
-				"/api/save-stamp",
+				"https://stamptour.xyz/api/save-stamp",
 				{id},
 				{
 					headers: {
