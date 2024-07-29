@@ -77,6 +77,7 @@ const Stampmain = () => {
 		try {
 			const res = await getUserInfo();
 			console.log("유저 데이터 가져오기 성공: ", res.data);
+			console.log("token: ", token);
 
 			if (res.status === 200) {
 				setUserData(res.data);
@@ -110,7 +111,6 @@ const Stampmain = () => {
 	const saveQRData = async (id) => {
 		const token = localStorage.getItem("token");
 		try {
-			console.log("token: ", token);
 			const res = await axios.post(
 				"https://stamptour.xyz/api/save-stamp",
 				{id},
