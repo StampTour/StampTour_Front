@@ -23,8 +23,10 @@ import BoothInfo from "../article/BoothInfo";
 
 // apis
 import {getUserInfo} from "../../../apis/main";
+import {useCookies} from "react-cookie";
 
 const Stampmain = () => {
+	const [cookies] = useCookies(["token"]);
 	const [searchParams] = useSearchParams();
 	const stampedId = searchParams.get("stampedId");
 	const token = localStorage.getItem("token");
@@ -109,14 +111,13 @@ const Stampmain = () => {
 	};
 
 	const saveQRData = async (id) => {
-		const token = localStorage.getItem("token");
 		try {
 			const res = await axios.post(
 				"https://stamptour.xyz/api/save-stamp",
 				{id},
 				{
 					headers: {
-						Authorization: `Bearer ${token}`,
+						Authorization: `Bearer ${cookies.token}`,
 					},
 				}
 			);
@@ -158,14 +159,13 @@ const Stampmain = () => {
 	useEffect(() => {
 		console.log("boolean: ", boolean);
 		console.log("userData: ", userData);
-		console.log("stampedBooths: ", stampedBooths);
-	}, [boolean, userData]);
+		console.log("booths: ", booths);
+	}, [boolean, userData, stampedBooths]);
 
 	const newBooth = booths.map((booth) => {
 		const isStamped = boolean[booth.id - 1]; // boolean 배열을 사용하여 상태 확인
-		const src = isStamped
-			? booth.afterSrc
-			: booth.beforeSrc;
+		const src =
+			isStamped === true ? booth.afterSrc : booth.beforeSrc;
 
 		return (
 			<button
