@@ -1,9 +1,9 @@
 import apiClient from "../apiClient";
 
 export const getUserInfo = () => {
-	return apiClient.get("/user-info");
+	return apiClient.get("/userinfo");
 };
 
 export const saveQRdata = (id) => {
-	return apiClient.post("/save-stamp", {id});
+	return apiClient.post("/savestamp", {id});
 };

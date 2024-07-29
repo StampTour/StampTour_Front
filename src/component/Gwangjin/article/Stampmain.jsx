@@ -76,7 +76,6 @@ const Stampmain = () => {
 		try {
 			const res = await getUserInfo();
 			console.log("유저 데이터 가져오기 성공: ", res.data);
-			console.log("token: ", token);
 
 			if (res.status === 200) {
 				setUserData(res.data);
