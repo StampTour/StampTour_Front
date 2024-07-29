@@ -5,7 +5,6 @@ import {
 	useNavigate,
 	useSearchParams,
 } from "react-router-dom";
-import axios from "axios";
 
 // img
 import Before_Robot_X from "../../../img/Before_Robot_X.svg";
@@ -22,11 +21,9 @@ import After_VR_O from "../../../img/After_Vr_O.svg";
 import BoothInfo from "../article/BoothInfo";
 
 // apis
-import {getUserInfo} from "../../../apis/main";
-import {useCookies} from "react-cookie";
+import {getUserInfo, saveQRdata} from "../../../apis/main";
 
 const Stampmain = () => {
-	const [cookies] = useCookies(["token"]);
 	const [searchParams] = useSearchParams();
 	const stampedId = searchParams.get("stampedId");
 	const token = localStorage.getItem("token");
@@ -72,7 +69,7 @@ const Stampmain = () => {
 	);
 	const [userData, setUserData] = useState();
 
-	const [stampedBooths, setStampedBooths] = useState([]);
+	const [stampedBooths] = useState([]);
 	const navigate = useNavigate();
 
 	const getData = async () => {
@@ -111,16 +108,9 @@ const Stampmain = () => {
 	};
 
 	const saveQRData = async (id) => {
+		console.log("stampedId: ", stampedId);
 		try {
-			const res = await axios.post(
-				"https://stamptour.xyz/api/save-stamp",
-				{id},
-				{
-					headers: {
-						Authorization: `Bearer ${cookies.token}`,
-					},
-				}
-			);
+			const res = await saveQRdata(id);
 			console.log("QR 저장 성공!!!!: ", res.data);
 		} catch (e) {
 			console.log("qr save error : ", e);
@@ -137,17 +127,17 @@ const Stampmain = () => {
 
 		if (stampedId) {
 			const id = parseInt(stampedId, 10);
-			if (!stampedBooths.includes(id)) {
-				setStampedBooths((prev) => [...prev, id]);
+			setBoolean((prevBoolean) => {
+				let newArray = [...prevBoolean];
+				newArray[id - 1] = true; // 인덱스는 0부터 시작하므로 id-1 사용
+				return newArray;
+			});
 
-				setBoolean((prevBoolean) => {
-					let newArray = [...prevBoolean];
-					newArray[id - 1] = true; // 인덱스는 0부터 시작하므로 id-1 사용
-					return newArray;
-				});
+			saveQRData(stampedId);
+			// if (!stampedBooths.includes(id)) {
+			// 	setStampedBooths((prev) => [...prev, id]);
 
-				saveQRData(stampedId);
-			}
+			// }
 		}
 	}, []);
 
