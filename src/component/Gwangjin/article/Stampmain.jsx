@@ -5,6 +5,7 @@ import {
 	useNavigate,
 	useSearchParams,
 } from "react-router-dom";
+import axios from "axios";
 
 // img
 import Before_Robot_X from "../../../img/Before_Robot_X.svg";
@@ -106,9 +107,18 @@ const Stampmain = () => {
 		}
 	};
 
-	const saveQRData = async (id) => {
+	const saveQRdata = async (id) => {
+		const token = localStorage.getItem("token");
 		try {
-			const res = await saveQRdata(id);
+			const res = await axios.post(
+				"/api/save-stamp",
+				{id},
+				{
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				}
+			);
 			console.log("QR 저장 성공!!!!: ", res.data);
 		} catch (e) {
 			console.log("qr save error : ", e);
@@ -134,7 +144,7 @@ const Stampmain = () => {
 					return newArray;
 				});
 
-				saveQRData(stampedId);
+				saveQRdata(stampedId);
 			}
 		}
 	}, []);
