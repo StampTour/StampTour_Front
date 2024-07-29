@@ -18,12 +18,11 @@ import After_Drone_O from "../../../img/After_Drone_O.svg";
 import After_Robot_O from "../../../img/After_Robot_O.svg";
 import After_VR_O from "../../../img/After_Vr_O.svg";
 
-// library
 // constants
 import BoothInfo from "../article/BoothInfo";
 
 // apis
-import {getUserInfo, saveQRdata} from "../../../apis/main";
+import {getUserInfo} from "../../../apis/main";
 
 const Stampmain = () => {
 	const [searchParams] = useSearchParams();
@@ -166,7 +165,6 @@ const Stampmain = () => {
 		const src = isStamped
 			? booth.afterSrc
 			: booth.beforeSrc;
-		// console.log("newBooth:", newBooth);
 
 		return (
 			<button
