@@ -24,6 +24,7 @@ import BoothInfo from "../article/BoothInfo";
 
 // apis
 import {getUserInfo, saveQRdata} from "../../../apis/main";
+
 const Stampmain = () => {
 	const [searchParams] = useSearchParams();
 	const stampedId = searchParams.get("stampedId");
@@ -108,15 +109,6 @@ const Stampmain = () => {
 	};
 
 	const saveQRData = async (id) => {
-		try {
-			const res = await saveQRdata(id);
-			console.log("QR 저장 성공!!!!: ", res.data);
-		} catch (e) {
-			console.log("qr save error : ", e);
-		}
-	};
-
-	const saveQRdata = async (id) => {
 		const token = localStorage.getItem("token");
 		try {
 			const res = await axios.post(
