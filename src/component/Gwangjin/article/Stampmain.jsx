@@ -204,8 +204,9 @@ const Stampmain = () => {
 		if (!token) {
 			setCookies("stampedidCookie", stampedId, {
 				path: "/",
-				sameSite: "none",
+				sameSite: "None",
 				secure: true,
+				domain: "netlify.app",
 			});
 			navigation("/");
 		}

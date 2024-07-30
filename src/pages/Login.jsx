@@ -29,9 +29,11 @@ const Login = () => {
 			if (response.data.token) {
 				setCookies("token", response.data.token, {
 					path: "/",
-					sameSite: "none",
+					sameSite: "None",
 					secure: true,
+					domain: "netlify.app",
 				});
+				localStorage.setItem("token", response.data.token);
 				navigate("/Gwangjin");
 			} else {
 				console.error(
