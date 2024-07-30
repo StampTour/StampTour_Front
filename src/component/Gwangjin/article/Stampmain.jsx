@@ -19,16 +19,18 @@ import After_VR_O from "../../../img/After_Vr_O.svg";
 
 // constants
 import BoothInfo from "../article/BoothInfo";
-import {Cookies} from "react-cookie";
+import {Cookies, useCookies} from "react-cookie";
 import axios from "axios";
 
 const Stampmain = () => {
 	const navigation = useNavigate();
-	const cookies = new Cookies();
-	const accessToken = cookies.get("token");
+	const [cookies, setCookies, removeCookies] = useCookies([
+		"token",
+		"stampedidCookie",
+	]);
+	const {token, stampedidCookie} = cookies;
 	const [searchParams] = useSearchParams();
 	const stampedId = searchParams.get("stampedId");
-	const saveStampedId = localStorage.getItem("stampId");
 	const booths = [
 		{
 			id: 1,
@@ -109,7 +111,7 @@ const Stampmain = () => {
 				"https://stamptour.xyz/api/userinfo",
 				{
 					headers: {
-						Authorization: `Bearer ${accessToken}`,
+						Authorization: `Bearer ${token}`,
 					},
 				}
 			);
@@ -148,19 +150,19 @@ const Stampmain = () => {
 		try {
 			const res = await axios.post(
 				`https://stamptour.xyz/api/savestamp?stampedId=${
-					stampedId !== null ? stampedId : saveStampedId
+					stampedId !== null ? stampedId : stampedidCookie
 				}`,
 				{},
 				{
 					headers: {
-						Authorization: `Bearer ${accessToken}`,
+						Authorization: `Bearer ${token}`,
 					},
 				}
 			);
 			console.log("QR 저장 성공!!!!: ", res);
 			if (res.status === 200) {
-				localStorage.removeItem("stampedId");
 				getData();
+				removeCookies("stampedidCookie");
 			}
 		} catch (e) {
 			console.log("qr save error : ", e);
@@ -168,7 +170,11 @@ const Stampmain = () => {
 	};
 
 	useEffect(() => {
-		if (!accessToken) {
+		saveQRData();
+	}, []);
+
+	useEffect(() => {
+		if (!token) {
 			navigation("/");
 			return;
 		}
@@ -193,11 +199,11 @@ const Stampmain = () => {
 
 	useEffect(() => {
 		// console.log("accessToken:", accessToken);
-		if (!accessToken && stampedId === null) {
-			localStorage.setItem("stampId", stampedId);
+		if (!token) {
+			setCookies("stampedidCookie", stampedId, {path: "/"});
 			navigation("/");
 		}
-	}, [accessToken, stampedId]);
+	}, [token, stampedId]);
 
 	const handleClick = (boothId) => {
 		setSelectedBoothId(boothId);
