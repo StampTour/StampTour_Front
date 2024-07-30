@@ -16,6 +16,8 @@ import After_Car_O from "../../../img/After_Car_O.svg";
 import After_Drone_O from "../../../img/After_Drone_O.svg";
 import After_Robot_O from "../../../img/After_Robot_O.svg";
 import After_VR_O from "../../../img/After_Vr_O.svg";
+import stampbasico from "../../../img/stampbasico.png";
+import stampbasicx from "../../../img/stampbasicx.png";
 
 // constants
 import BoothInfo from "../article/BoothInfo";
@@ -64,33 +66,33 @@ const Stampmain = () => {
 		},
 		{
 			id: 6,
-			name: "자율주행 체험존",
-			beforeSrc: Before_Car_X,
-			afterSrc: After_Car_O,
+			name: "mission",
+			beforeSrc: stampbasicx,
+			afterSrc: stampbasico,
 		},
 		{
 			id: 7,
-			name: "자율주행 체험존",
-			beforeSrc: Before_Car_X,
-			afterSrc: After_Car_O,
+			name: "mission",
+			beforeSrc: stampbasicx,
+			afterSrc: stampbasico,
 		},
 		{
 			id: 8,
-			name: "자율주행 체험존",
-			beforeSrc: Before_Car_X,
-			afterSrc: After_Car_O,
+			name: "mission",
+			beforeSrc: stampbasicx,
+			afterSrc: stampbasico,
 		},
 		{
 			id: 9,
-			name: "자율주행 체험존",
-			beforeSrc: Before_Car_X,
-			afterSrc: After_Car_O,
+			name: "mission",
+			beforeSrc: stampbasicx,
+			afterSrc: stampbasico,
 		},
 		{
 			id: 10,
-			name: "자율주행 체험존",
-			beforeSrc: Before_Car_X,
-			afterSrc: After_Car_O,
+			name: "mission",
+			beforeSrc: stampbasicx,
+			afterSrc: stampbasico,
 		},
 	];
 
