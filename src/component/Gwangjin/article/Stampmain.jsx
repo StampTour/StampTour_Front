@@ -23,6 +23,7 @@ import {Cookies} from "react-cookie";
 import axios from "axios";
 
 const Stampmain = () => {
+	const navigation = useNavigate();
 	const cookies = new Cookies();
 	const accessToken = cookies.get("token");
 	const [searchParams] = useSearchParams();
@@ -55,6 +56,36 @@ const Stampmain = () => {
 		},
 		{
 			id: 5,
+			name: "자율주행 체험존",
+			beforeSrc: Before_Car_X,
+			afterSrc: After_Car_O,
+		},
+		{
+			id: 6,
+			name: "자율주행 체험존",
+			beforeSrc: Before_Car_X,
+			afterSrc: After_Car_O,
+		},
+		{
+			id: 7,
+			name: "자율주행 체험존",
+			beforeSrc: Before_Car_X,
+			afterSrc: After_Car_O,
+		},
+		{
+			id: 8,
+			name: "자율주행 체험존",
+			beforeSrc: Before_Car_X,
+			afterSrc: After_Car_O,
+		},
+		{
+			id: 9,
+			name: "자율주행 체험존",
+			beforeSrc: Before_Car_X,
+			afterSrc: After_Car_O,
+		},
+		{
+			id: 10,
 			name: "자율주행 체험존",
 			beforeSrc: Before_Car_X,
 			afterSrc: After_Car_O,
@@ -111,27 +142,29 @@ const Stampmain = () => {
 			}
 		} catch (e) {
 			console.log("get data error : ", e);
+			navigation("/");
 		}
 	};
 
-	const saveQRData = async (id) => {
-		console.log("stampedId: ", stampedId);
-		try {
-			const res = await axios.post(
-				`https://stamptour.xyz/api/savestamp?stampedId=${stampedId}`,
-				{},
-				{
-					headers: {
-						Authorization: `Bearer ${accessToken}`,
-					},
+	const saveQRData = async () => {
+		if (accessToken.length > 0) {
+			try {
+				const res = await axios.post(
+					`https://stamptour.xyz/api/savestamp?stampedId=${stampedId}`,
+					{},
+					{
+						headers: {
+							Authorization: `Bearer ${accessToken}`,
+						},
+					}
+				);
+				console.log("QR 저장 성공!!!!: ", res);
+				if (res.status === 200) {
+					getData();
 				}
-			);
-			console.log("QR 저장 성공!!!!: ", res);
-			if (res.status === 200) {
-				getData();
+			} catch (e) {
+				console.log("qr save error : ", e);
 			}
-		} catch (e) {
-			console.log("qr save error : ", e);
 		}
 	};
 
@@ -151,7 +184,7 @@ const Stampmain = () => {
 				return newArray;
 			});
 
-			saveQRData(stampedId);
+			saveQRData();
 			// if (!stampedBooths.includes(id)) {
 			// 	setStampedBooths((prev) => [...prev, id]);
 
