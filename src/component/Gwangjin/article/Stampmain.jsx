@@ -21,7 +21,7 @@ import stampbasicx from "../../../img/stampbasicx.png";
 
 // constants
 import BoothInfo from "../article/BoothInfo";
-import {Cookies, useCookies} from "react-cookie";
+import {useCookies} from "react-cookie";
 import axios from "axios";
 
 const Stampmain = () => {
