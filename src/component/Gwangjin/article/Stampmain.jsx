@@ -149,27 +149,25 @@ const Stampmain = () => {
 	};
 
 	const saveQRData = async () => {
-		if (accessToken.length > 0) {
-			try {
-				const res = await axios.post(
-					`https://stamptour.xyz/api/savestamp?stampedId=${
-						stampedId !== null ? stampedId : saveStampedId
-					}`,
-					{},
-					{
-						headers: {
-							Authorization: `Bearer ${accessToken}`,
-						},
-					}
-				);
-				console.log("QR 저장 성공!!!!: ", res);
-				if (res.status === 200) {
-					localStorage.removeItem("stampedId");
-					getData();
+		try {
+			const res = await axios.post(
+				`https://stamptour.xyz/api/savestamp?stampedId=${
+					stampedId !== null ? stampedId : saveStampedId
+				}`,
+				{},
+				{
+					headers: {
+						Authorization: `Bearer ${accessToken}`,
+					},
 				}
-			} catch (e) {
-				console.log("qr save error : ", e);
+			);
+			console.log("QR 저장 성공!!!!: ", res);
+			if (res.status === 200) {
+				localStorage.removeItem("stampedId");
+				getData();
 			}
+		} catch (e) {
+			console.log("qr save error : ", e);
 		}
 	};
 
