@@ -29,7 +29,6 @@ const Stampmain = () => {
 	const [searchParams] = useSearchParams();
 	const stampedId = searchParams.get("stampedId");
 	const saveStampedId = localStorage.getItem("stampId");
-	const token = localStorage.getItem("token");
 	const booths = [
 		{
 			id: 1,
@@ -103,7 +102,6 @@ const Stampmain = () => {
 	const [userData, setUserData] = useState();
 
 	const [stampedBooths] = useState([]);
-	const navigate = useNavigate();
 
 	const getData = async () => {
 		try {
@@ -142,8 +140,6 @@ const Stampmain = () => {
 				setBoolean(qrArray);
 			}
 		} catch (e) {
-			localStorage.setItem("stampId", stampedId);
-			navigation("/");
 			console.log("get data error : ", e);
 		}
 	};
@@ -172,8 +168,8 @@ const Stampmain = () => {
 	};
 
 	useEffect(() => {
-		if (!token) {
-			navigate("/");
+		if (!accessToken) {
+			navigation("/");
 			return;
 		}
 
@@ -194,6 +190,14 @@ const Stampmain = () => {
 			// }
 		}
 	}, []);
+
+	useEffect(() => {
+		// console.log("accessToken:", accessToken);
+		if (!accessToken && stampedId === null) {
+			localStorage.setItem("stampId", stampedId);
+			navigation("/");
+		}
+	}, [accessToken, stampedId]);
 
 	const handleClick = (boothId) => {
 		setSelectedBoothId(boothId);
