@@ -28,6 +28,7 @@ const Stampmain = () => {
 	const accessToken = cookies.get("token");
 	const [searchParams] = useSearchParams();
 	const stampedId = searchParams.get("stampedId");
+	const saveStampedId = localStorage.getItem("stampId");
 	const token = localStorage.getItem("token");
 	const booths = [
 		{
@@ -141,8 +142,9 @@ const Stampmain = () => {
 				setBoolean(qrArray);
 			}
 		} catch (e) {
-			console.log("get data error : ", e);
+			localStorage.setItem("stampId", stampedId);
 			navigation("/");
+			console.log("get data error : ", e);
 		}
 	};
 
@@ -150,7 +152,9 @@ const Stampmain = () => {
 		if (accessToken.length > 0) {
 			try {
 				const res = await axios.post(
-					`https://stamptour.xyz/api/savestamp?stampedId=${stampedId}`,
+					`https://stamptour.xyz/api/savestamp?stampedId=${
+						stampedId !== null ? stampedId : saveStampedId
+					}`,
 					{},
 					{
 						headers: {
@@ -160,6 +164,7 @@ const Stampmain = () => {
 				);
 				console.log("QR 저장 성공!!!!: ", res);
 				if (res.status === 200) {
+					localStorage.removeItem("stampedId");
 					getData();
 				}
 			} catch (e) {

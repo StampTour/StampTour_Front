@@ -30,7 +30,6 @@ const Login = () => {
 				setCookies("token", response.data.token, {
 					path: "/",
 				});
-				localStorage.setItem("token", response.data.token);
 				navigate("/Gwangjin");
 			} else {
 				console.error(
