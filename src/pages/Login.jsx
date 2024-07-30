@@ -31,7 +31,6 @@ const Login = () => {
 					path: "/",
 					sameSite: "None",
 					secure: true,
-					domain: "netlify.app",
 				});
 				localStorage.setItem("token", response.data.token);
 				navigate("/Gwangjin");

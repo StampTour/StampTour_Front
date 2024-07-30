@@ -206,7 +206,6 @@ const Stampmain = () => {
 				path: "/",
 				sameSite: "None",
 				secure: true,
-				domain: "netlify.app",
 			});
 			navigation("/");
 		}
