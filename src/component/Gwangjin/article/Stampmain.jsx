@@ -19,11 +19,12 @@ import After_VR_O from "../../../img/After_Vr_O.svg";
 
 // constants
 import BoothInfo from "../article/BoothInfo";
-
-// apis
-import {getUserInfo, saveQRdata} from "../../../apis/main";
+import {Cookies} from "react-cookie";
+import axios from "axios";
 
 const Stampmain = () => {
+	const cookies = new Cookies();
+	const accessToken = cookies.get("token");
 	const [searchParams] = useSearchParams();
 	const stampedId = searchParams.get("stampedId");
 	const token = localStorage.getItem("token");
@@ -74,7 +75,14 @@ const Stampmain = () => {
 
 	const getData = async () => {
 		try {
-			const res = await getUserInfo();
+			const res = await axios.get(
+				"https://stamptour.xyz/api/userinfo",
+				{
+					headers: {
+						Authorization: `Bearer ${accessToken}`,
+					},
+				}
+			);
 			console.log("유저 데이터 가져오기 성공: ", res.data);
 
 			if (res.status === 200) {
@@ -109,8 +117,19 @@ const Stampmain = () => {
 	const saveQRData = async (id) => {
 		console.log("stampedId: ", stampedId);
 		try {
-			const res = await saveQRdata(id);
-			console.log("QR 저장 성공!!!!: ", res.data);
+			const res = await axios.post(
+				`https://stamptour.xyz/api/savestamp?stampedId=${stampedId}`,
+				{},
+				{
+					headers: {
+						Authorization: `Bearer ${accessToken}`,
+					},
+				}
+			);
+			console.log("QR 저장 성공!!!!: ", res);
+			if (res.status === 200) {
+				getData();
+			}
 		} catch (e) {
 			console.log("qr save error : ", e);
 		}
