@@ -26,13 +26,14 @@ import axios from "axios";
 
 const Stampmain = () => {
 	const navigation = useNavigate();
-	const [cookies, setCookies, removeCookies] = useCookies([
+	const [, setCookies, removeCookies] = useCookies([
 		"token",
 		"stampedidCookie",
 	]);
-	const {token, stampedidCookie} = cookies;
 	const [searchParams] = useSearchParams();
 	const stampedId = searchParams.get("stampedId");
+	const stampIdCookie = localStorage.getItem("stampedId");
+	const Ltoken = localStorage.getItem("token");
 	const booths = [
 		{
 			id: 1,
@@ -113,7 +114,7 @@ const Stampmain = () => {
 				"https://stamptour.xyz/api/userinfo",
 				{
 					headers: {
-						Authorization: `Bearer ${token}`,
+						Authorization: `Bearer ${Ltoken}`,
 					},
 				}
 			);
@@ -152,12 +153,12 @@ const Stampmain = () => {
 		try {
 			const res = await axios.post(
 				`https://stamptour.xyz/api/savestamp?stampedId=${
-					stampedId !== null ? stampedId : stampedidCookie
+					stampedId !== null ? stampedId : stampIdCookie
 				}`,
 				{},
 				{
 					headers: {
-						Authorization: `Bearer ${token}`,
+						Authorization: `Bearer ${Ltoken}`,
 					},
 				}
 			);
@@ -176,7 +177,7 @@ const Stampmain = () => {
 	}, []);
 
 	useEffect(() => {
-		if (!token) {
+		if (!Ltoken) {
 			navigation("/");
 			return;
 		}
@@ -201,15 +202,16 @@ const Stampmain = () => {
 
 	useEffect(() => {
 		// console.log("accessToken:", accessToken);
-		if (!token) {
+		if (!Ltoken) {
 			setCookies("stampedidCookie", stampedId, {
 				path: "/",
 				sameSite: "None",
 				secure: true,
 			});
+			localStorage.setItem("stampedId", stampedId);
 			navigation("/");
 		}
-	}, [token, stampedId]);
+	}, [Ltoken, stampedId]);
 
 	const handleClick = (boothId) => {
 		setSelectedBoothId(boothId);
