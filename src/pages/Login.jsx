@@ -29,6 +29,8 @@ const Login = () => {
 			if (response.data.token) {
 				setCookies("token", response.data.token, {
 					path: "/",
+					sameSite: "none",
+					secure: true,
 				});
 				navigate("/Gwangjin");
 			} else {

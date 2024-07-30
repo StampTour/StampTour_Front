@@ -202,7 +202,11 @@ const Stampmain = () => {
 	useEffect(() => {
 		// console.log("accessToken:", accessToken);
 		if (!token) {
-			setCookies("stampedidCookie", stampedId, {path: "/"});
+			setCookies("stampedidCookie", stampedId, {
+				path: "/",
+				sameSite: "none",
+				secure: true,
+			});
 			navigation("/");
 		}
 	}, [token, stampedId]);
