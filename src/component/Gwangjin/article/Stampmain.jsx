@@ -207,6 +207,7 @@ const Stampmain = () => {
 				path: "/",
 				sameSite: "None",
 				secure: true,
+				domain: process.env.REACT_APP_COOKIE_DOMAIN,
 			});
 			localStorage.setItem("stampedId", stampedId);
 			navigation("/");
