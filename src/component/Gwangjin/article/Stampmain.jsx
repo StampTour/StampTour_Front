@@ -16,6 +16,7 @@ import After_Car_O from "../../../img/After_Car_O.svg";
 import After_Drone_O from "../../../img/After_Drone_O.svg";
 import After_Robot_O from "../../../img/After_Robot_O.svg";
 import After_VR_O from "../../../img/After_Vr_O.svg";
+import After_AR_O from "../../../img/After_AR_O.svg";
 import stampbasico from "../../../img/stampbasico.png";
 import stampbasicx from "../../../img/stampbasicx.png";
 
@@ -51,7 +52,7 @@ const Stampmain = () => {
 			id: 3,
 			name: "AR 체험존",
 			beforeSrc: Before_AR_X,
-			afterSrc: After_Drone_O,
+			afterSrc: After_AR_O,
 		},
 		{
 			id: 4,
