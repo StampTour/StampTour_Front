@@ -38,7 +38,7 @@ const Stampmain = () => {
 	const booths = [
 		{
 			id: 1,
-			name: "로봇 체험존",
+			name: "로봇 체험존1",
 			beforeSrc: Before_Robot_X,
 			afterSrc: After_Robot_O,
 		},
