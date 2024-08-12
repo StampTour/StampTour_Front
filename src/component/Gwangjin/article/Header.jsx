@@ -1,5 +1,5 @@
 import React from "react";
-import Hiimg from "../../../img/Hi.png";
+import Hiimg from "../../../../public/img/Hi.png";
 
 const Header = () => {
 	return (
