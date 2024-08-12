@@ -22,7 +22,7 @@ const Login = () => {
 						userid: userid,
 					},
 					stampRequest: {
-						id: null,
+						id: "",
 					},
 				}
 			);
