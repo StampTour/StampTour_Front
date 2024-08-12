@@ -7,18 +7,18 @@ import {
 } from "react-router-dom";
 
 // img
-import Before_Robot_X from "../../../img/Before_Robot_X.svg";
-import Before_Drone_X from "../../../img/Before_Drone_X.svg";
-import Before_AR_X from "../../../img/Before_AR_X.svg";
-import Before_VR_X from "../../../img/Before_VR_X.svg";
-import Before_Car_X from "../../../img/Before_Car_X.svg";
-import After_Car_O from "../../../img/After_Car_O.svg";
-import After_Drone_O from "../../../img/After_Drone_O.svg";
-import After_Robot_O from "../../../img/After_Robot_O.svg";
-import After_VR_O from "../../../img/After_Vr_O.svg";
-import After_AR_O from "../../../img/After_AR_O.svg";
-import stampbasico from "../../../img/stampbasico.png";
-import stampbasicx from "../../../img/stampbasicx.png";
+import Before_AR_X from "../../../../public/img/Before_AR_X.svg";
+import Before_Car_X from "../../../../public//img/Before_Car_X.svg";
+import Before_Drone_X from "../../../../public/img/Before_Drone_X.svg";
+import Before_Robot_X from "../../../../public/img/Before_Robot_X.svg";
+import Before_VR_X from "../../../../public/img/Before_VR_X.svg";
+import After_AR_O from "../../../../public/img/After_AR_O.svg";
+import After_Car_O from "../../../../public/img/After_Car_O.svg";
+import After_Drone_O from "../../../../public/img/After_Drone_O.svg";
+import After_Vr_O from "../../../../public/img/After_Vr_O.svg";
+import After_Robot_O from "../../../../public/img/After_Robot_O.svg";
+import stampbasico from "../../../../public/img/stampbasico.png";
+import stampbasicx from "../../../../public/img/stampbasicx.png";
 
 // constants
 import BoothInfo from "../article/BoothInfo";
@@ -58,7 +58,7 @@ const Stampmain = () => {
 			id: 4,
 			name: "VR 체험존",
 			beforeSrc: Before_VR_X,
-			afterSrc: After_VR_O,
+			afterSrc: After_Vr_O,
 		},
 		{
 			id: 5,
