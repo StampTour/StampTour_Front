@@ -1,5 +1,4 @@
 import React from "react";
-import Hiimg from "../../../../public/img/Hi.png";
 
 const Header = () => {
 	return (
@@ -14,7 +13,7 @@ const Header = () => {
 			<div className='flex flex-row justify-center my-[20px]'>
 				<img
 					className='h-[50px] mr-[10px]'
-					src={Hiimg}
+					src='img/Hi.png'
 					alt=''
 				/>
 				<div className='Stampfont flex flex-col items-center text-[15px] text-[black]'>
@@ -25,7 +24,7 @@ const Header = () => {
 				</div>
 				<img
 					className='h-[50px] ml-[5px]'
-					src={Hiimg}
+					src='img/Hi.png'
 					alt=''
 				/>
 			</div>
