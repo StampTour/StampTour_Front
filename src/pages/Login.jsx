@@ -43,7 +43,7 @@ const Login = () => {
 			}
 		} catch (error) {
 			console.error("오류", error);
-			alert("전송실패");
+			alert("전송실패!!");
 		}
 	};
 
