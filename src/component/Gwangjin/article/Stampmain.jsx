@@ -6,24 +6,12 @@ import {
 	useSearchParams,
 } from "react-router-dom";
 
-// img
-// import Before_AR_X from "public/img/Before_AR_X.svg";
-// import Before_Car_X from "public/img/Before_Car_X.svg";
-// import Before_Drone_X from "public/img/Before_Drone_X.svg";
-// import Before_Robot_X from "public/img/Before_Robot_X.svg";
-// import Before_VR_X from "public/img/img/Before_VR_X.svg";
-// import After_AR_O from "../../../../public/img/After_AR_O.svg";
-// import After_Car_O from "../../../../public/img/After_Car_O.svg";
-// import After_Drone_O from "../../../../public/img/After_Drone_O.svg";
-// import After_Vr_O from "../../../../public/img/After_Vr_O.svg";
-// import After_Robot_O from "../../../../public/img/After_Robot_O.svg";
-// import stampbasico from "../../../../public/img/stampbasico.png";
-// import stampbasicx from "../../../../public/img/stampbasicx.png";
-
 // constants
 import BoothInfo from "../article/BoothInfo";
 import {useCookies} from "react-cookie";
 import axios from "axios";
+
+import {browserName} from "react-device-detect";
 
 const Stampmain = () => {
 	const navigation = useNavigate();
@@ -174,7 +162,11 @@ const Stampmain = () => {
 	};
 
 	useEffect(() => {
-		saveQRData();
+		if (browserName === "Chrome") {
+			saveQRData();
+		} else {
+			navigation("/");
+		}
 	}, []);
 
 	useEffect(() => {
