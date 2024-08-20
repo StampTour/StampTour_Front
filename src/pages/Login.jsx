@@ -55,9 +55,15 @@ const Login = () => {
 
 	useEffect(() => {
 		if (isSafari()) {
-			alert(
-				"이 사이트는 Chrome에서 최적화되어 있습니다. Chrome을 사용해주세요."
-			);
+			if (
+				window.confirm(
+					"이 사이트는 Chrome에서 최적화되어 있습니다. Chrome을 사용해주세요. 크롬 페이지로 이동하시겠습니까?"
+				)
+			) {
+				// 크롬 다운로드 페이지로 이동
+				window.location.href =
+					"https://www.google.com/chrome/";
+			}
 		}
 	}, []);
 
