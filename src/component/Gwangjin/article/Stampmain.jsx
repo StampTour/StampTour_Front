@@ -27,7 +27,7 @@ import axios from "axios";
 
 const Stampmain = () => {
 	const navigation = useNavigate();
-	const [, setCookies, removeCookies] = useCookies([
+	const [cookies, setCookies, removeCookies] = useCookies([
 		"token",
 		"stampedidCookie",
 	]);
@@ -194,10 +194,6 @@ const Stampmain = () => {
 			});
 
 			saveQRData();
-			// if (!stampedBooths.includes(id)) {
-			// 	setStampedBooths((prev) => [...prev, id]);
-
-			// }
 		}
 	}, []);
 

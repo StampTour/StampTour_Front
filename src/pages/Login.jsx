@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import {useCookies} from "react-cookie";
@@ -46,6 +46,22 @@ const Login = () => {
 			alert("전송실패!!");
 		}
 	};
+
+	function isSafari() {
+		const ua = navigator.userAgentData.platform;
+		const uaa = navigator.userAgent.toLowerCase();
+		console.log("safari", ua);
+		console.log("safaris", uaa);
+		return ua.includes("safari") && !ua.includes("chrome");
+	}
+
+	useEffect(() => {
+		if (isSafari()) {
+			alert(
+				"이 사이트는 Chrome에서 최적화되어 있습니다. Chrome을 사용해주세요."
+			);
+		}
+	}, []);
 
 	return (
 		<div className='h-screen flex items-center justify-center bg-[#bfeefe]'>
