@@ -53,6 +53,22 @@ const Login = () => {
 		return ua.includes("safari") && !ua.includes("chrome");
 	}
 
+	function redirectToChrome() {
+		const currentUrl = window.location.href;
+		const chromeUrl = currentUrl.replace(
+			/^https?:\/\//,
+			"googlechrome://"
+		);
+
+		window.location.href = chromeUrl;
+
+		setTimeout(() => {
+			alert(
+				"Chrome에서 링크를 열 수 없습니다. Chrome이 설치되어 있는지 확인하세요."
+			);
+		}, 500); // 0.5초 후에 경고 메시지 출력
+	}
+
 	useEffect(() => {
 		if (isSafari()) {
 			if (
@@ -60,9 +76,7 @@ const Login = () => {
 					"이 사이트는 Chrome에서 최적화되어 있습니다. Chrome을 사용해주세요. 크롬 페이지로 이동하시겠습니까?"
 				)
 			) {
-				// 크롬 다운로드 페이지로 이동
-				window.location.href =
-					"https://www.google.com/chrome/";
+				redirectToChrome();
 			}
 		}
 	}, []);
