@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import {useCookies} from "react-cookie";
+import {browserName} from "react-device-detect";
 
 const Login = () => {
 	const [, setCookies] = useCookies(["token"]);
@@ -47,12 +48,6 @@ const Login = () => {
 		}
 	};
 
-	function isSafari() {
-		const ua = navigator.userAgent.toLowerCase();
-		console.log("userAgent", ua);
-		return ua.includes("safari") && !ua.includes("chrome");
-	}
-
 	function redirectToChrome() {
 		const currentUrl = window.location.href;
 		const chromeUrl = currentUrl.replace(
@@ -70,7 +65,7 @@ const Login = () => {
 	}
 
 	useEffect(() => {
-		if (isSafari()) {
+		if (browserName !== "Chrome") {
 			if (
 				window.confirm(
 					"이 사이트는 Chrome에서 최적화되어 있습니다. Chrome을 사용해주세요. 크롬 페이지로 이동하시겠습니까?"
