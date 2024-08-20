@@ -27,7 +27,7 @@ import axios from "axios";
 
 const Stampmain = () => {
 	const navigation = useNavigate();
-	const [cookies, setCookies, removeCookies] = useCookies([
+	const [, setCookies, removeCookies] = useCookies([
 		"token",
 		"stampedidCookie",
 	]);
