@@ -7,6 +7,7 @@ import {browserName} from "react-device-detect";
 const Login = () => {
 	const [, setCookies] = useCookies(["token"]);
 	const [userid, setUserid] = useState("");
+	const savedStampId = localStorage.getItem("stampedId");
 	const navigate = useNavigate();
 
 	const getUserid = (e) => {
@@ -50,10 +51,12 @@ const Login = () => {
 
 	function redirectToChrome() {
 		const currentUrl = window.location.href;
-		const chromeUrl = currentUrl.replace(
-			/^https?:\/\//,
-			"googlechrome://"
-		);
+		const params = `?stampId=${savedStampId}`;
+		const chromeUrl =
+			currentUrl.replace(
+				/^https?:\/\//,
+				"googlechrome://"
+			) + params;
 
 		window.location.href = chromeUrl;
 
@@ -72,6 +75,19 @@ const Login = () => {
 				)
 			) {
 				redirectToChrome();
+			}
+		} else {
+			const urlParams = new URLSearchParams(
+				window.location.search
+			);
+			const stampId = urlParams.get("stampId");
+
+			if (stampId) {
+				// localStorage에 저장
+				localStorage.setItem("stampId", stampId);
+				console.log(`Stamp ID ${stampId} 저장 완료`);
+			} else {
+				console.log("stampId가 없습니다.");
 			}
 		}
 	}, []);
