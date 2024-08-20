@@ -48,10 +48,8 @@ const Login = () => {
 	};
 
 	function isSafari() {
-		const ua = navigator.userAgentData.platform;
-		const uaa = navigator.userAgent.toLowerCase();
-		console.log("safari", ua);
-		console.log("safaris", uaa);
+		const ua = navigator.userAgent.toLowerCase();
+		console.log("userAgent", ua);
 		return ua.includes("safari") && !ua.includes("chrome");
 	}
 
