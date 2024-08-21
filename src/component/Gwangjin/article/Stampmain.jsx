@@ -106,7 +106,7 @@ const Stampmain = () => {
 					},
 				}
 			);
-			console.log("유저 데이터 가져오기 성공: ", res.data);
+			// console.log("유저 데이터 가져오기 성공: ", res.data);
 
 			if (res.status === 200) {
 				setUserData(res.data);
@@ -152,7 +152,7 @@ const Stampmain = () => {
 					},
 				}
 			);
-			console.log("QR 저장 성공!!!!: ", res);
+			// console.log("QR 저장 성공!!!!: ", res);
 			if (res.status === 200) {
 				getData();
 				removeCookies("stampedidCookie");
@@ -205,11 +205,11 @@ const Stampmain = () => {
 		setVisible(!visible);
 	};
 
-	useEffect(() => {
-		console.log("boolean: ", boolean);
-		console.log("userData: ", userData);
-		console.log("booths: ", booths);
-	}, [boolean, userData, stampedBooths]);
+	// useEffect(() => {
+	// 	console.log("boolean: ", boolean);
+	// 	console.log("userData: ", userData);
+	// 	console.log("booths: ", booths);
+	// }, [boolean, userData, stampedBooths]);
 
 	const newBooth = booths.map((booth) => {
 		const isStamped = boolean[booth.id - 1]; // boolean 배열을 사용하여 상태 확인
