@@ -51,7 +51,7 @@ const Login = () => {
 
 	function redirectToChrome() {
 		const currentUrl = window.location.href;
-		const params = `?stampId=${savedStampId}`;
+		const params = `stampedId=${savedStampId}`;
 		const chromeUrl =
 			currentUrl.replace(
 				/^https?:\/\//,
