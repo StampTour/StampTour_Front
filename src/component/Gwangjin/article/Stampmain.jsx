@@ -139,8 +139,6 @@ const Stampmain = () => {
 
 	const saveQRData = async () => {
 		try {
-			alert(`${stampedId}`);
-			alert(`${stampIdLocalStorage}`);
 			const res = await axios.post(
 				`https://stamptour.xyz/api/savestamp?stampedId=${
 					stampedId !== null
