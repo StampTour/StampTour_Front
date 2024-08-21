@@ -21,7 +21,8 @@ const Stampmain = () => {
 	]);
 	const [searchParams] = useSearchParams();
 	const stampedId = searchParams.get("stampedId");
-	const stampIdCookie = localStorage.getItem("stampedId");
+	const stampIdLocalStorage =
+		localStorage.getItem("stampedId");
 	const Ltoken = localStorage.getItem("token");
 	const booths = [
 		{
@@ -140,9 +141,12 @@ const Stampmain = () => {
 
 	const saveQRData = async () => {
 		try {
+			alert(`${stampedId}`);
 			const res = await axios.post(
 				`https://stamptour.xyz/api/savestamp?stampedId=${
-					stampedId !== null ? stampedId : stampIdCookie
+					stampedId !== null
+						? stampedId
+						: stampIdLocalStorage
 				}`,
 				{},
 				{
