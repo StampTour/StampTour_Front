@@ -7,7 +7,7 @@ import {useCookies} from "react-cookie";
 const Login = () => {
 	const [, setCookies] = useCookies(["token"]);
 	const [userid, setUserid] = useState("");
-	const savedStampId = localStorage.getItem("stampedId");
+	// const savedStampId = localStorage.getItem("stampedId");
 	const navigate = useNavigate();
 
 	const getUserid = (e) => {
