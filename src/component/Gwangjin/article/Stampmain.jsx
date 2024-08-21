@@ -167,11 +167,7 @@ const Stampmain = () => {
 	};
 
 	useEffect(() => {
-		if (browserName === "Chrome") {
-			saveQRData();
-		} else {
-			navigation("/");
-		}
+		saveQRData();
 	}, []);
 
 	useEffect(() => {

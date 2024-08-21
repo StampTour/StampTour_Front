@@ -50,54 +50,54 @@ const Login = () => {
 		}
 	};
 
-	function redirectToChrome() {
-		const currentUrl = new URL(window.location.href);
-		const params = `stampedId=${savedStampId}`;
+	// function redirectToChrome() {
+	// 	const currentUrl = new URL(window.location.href);
+	// 	const params = `stampedId=${savedStampId}`;
 
-		// 기존 URL에 따라 적절하게 처리
-		const separator = currentUrl.search ? "&" : "?";
-		const chromeUrl =
-			currentUrl.href.replace(
-				/^https?:\/\//,
-				"googlechrome://"
-			) +
-			separator +
-			params;
+	// 	// 기존 URL에 따라 적절하게 처리
+	// 	const separator = currentUrl.search ? "&" : "?";
+	// 	const chromeUrl =
+	// 		currentUrl.href.replace(
+	// 			/^https?:\/\//,
+	// 			"googlechrome://"
+	// 		) +
+	// 		separator +
+	// 		params;
 
-		window.location.href = chromeUrl;
+	// 	window.location.href = chromeUrl;
 
-		setTimeout(() => {
-			alert(
-				"Chrome에서 링크를 열 수 없습니다. Chrome이 설치되어 있는지 확인하세요."
-			);
-		}, 500); // 0.5초 후에 경고 메시지 출력
-	}
+	// 	setTimeout(() => {
+	// 		alert(
+	// 			"Chrome에서 링크를 열 수 없습니다. Chrome이 설치되어 있는지 확인하세요."
+	// 		);
+	// 	}, 500); // 0.5초 후에 경고 메시지 출력
+	// }
 
-	useEffect(() => {
-		if (browserName !== "Chrome") {
-			if (
-				window.confirm(
-					"이 사이트는 Chrome에서 최적화되어 있습니다. Chrome을 사용해주세요. 크롬 페이지로 이동하시겠습니까?"
-				)
-			) {
-				redirectToChrome();
-			}
-		} else {
-			const urlParams = new URLSearchParams(
-				window.location.search
-			);
-			const stampId = urlParams.get("stampedId");
-			alert(`${stampId}`);
+	// useEffect(() => {
+	// 	if (browserName !== "Chrome") {
+	// 		if (
+	// 			window.confirm(
+	// 				"이 사이트는 Chrome에서 최적화되어 있습니다. Chrome을 사용해주세요. 크롬 페이지로 이동하시겠습니까?"
+	// 			)
+	// 		) {
+	// 			redirectToChrome();
+	// 		}
+	// 	} else {
+	// 		const urlParams = new URLSearchParams(
+	// 			window.location.search
+	// 		);
+	// 		const stampId = urlParams.get("stampedId");
+	// 		alert(`${stampId}`);
 
-			if (stampId) {
-				// localStorage에 저장
-				localStorage.setItem("stampedId", stampId);
-				console.log(`Stamp ID ${stampId} 저장 완료`);
-			} else {
-				console.log("stampId가 없습니다.");
-			}
-		}
-	}, []);
+	// 		if (stampId) {
+	// 			// localStorage에 저장
+	// 			localStorage.setItem("stampedId", stampId);
+	// 			console.log(`Stamp ID ${stampId} 저장 완료`);
+	// 		} else {
+	// 			console.log("stampId가 없습니다.");
+	// 		}
+	// 	}
+	// }, []);
 
 	return (
 		<div className='h-screen flex items-center justify-center bg-[#bfeefe]'>
