@@ -91,7 +91,7 @@ const Login = () => {
 
 			if (stampId) {
 				// localStorage에 저장
-				localStorage.setItem("stampId", stampId);
+				localStorage.setItem("stampedId", stampId);
 				console.log(`Stamp ID ${stampId} 저장 완료`);
 			} else {
 				console.log("stampId가 없습니다.");
