@@ -11,8 +11,6 @@ import BoothInfo from "../article/BoothInfo";
 import {useCookies} from "react-cookie";
 import axios from "axios";
 
-import {browserName} from "react-device-detect";
-
 const Stampmain = () => {
 	const navigation = useNavigate();
 	const [, setCookies, removeCookies] = useCookies([
