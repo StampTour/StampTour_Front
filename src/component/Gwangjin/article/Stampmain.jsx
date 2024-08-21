@@ -178,6 +178,7 @@ const Stampmain = () => {
 	}, []);
 
 	useEffect(() => {
+		alert(Ltoken);
 		if (!Ltoken) {
 			navigation("/");
 			return;
