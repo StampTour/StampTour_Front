@@ -51,13 +51,18 @@ const Login = () => {
 	};
 
 	function redirectToChrome() {
-		const currentUrl = window.location.href;
+		const currentUrl = new URL(window.location.href);
 		const params = `stampedId=${savedStampId}`;
+
+		// 기존 URL에 따라 적절하게 처리
+		const separator = currentUrl.search ? "&" : "?";
 		const chromeUrl =
-			currentUrl.replace(
+			currentUrl.href.replace(
 				/^https?:\/\//,
 				"googlechrome://"
-			) + params;
+			) +
+			separator +
+			params;
 
 		window.location.href = chromeUrl;
 
@@ -86,7 +91,7 @@ const Login = () => {
 			if (stampId) {
 				// localStorage에 저장
 				localStorage.setItem("stampId", stampId);
-				console.log(`Stamp ID ${stampId} 저장 완료s`);
+				console.log(`Stamp ID ${stampId} 저장 완료`);
 			} else {
 				console.log("stampId가 없습니다.");
 			}
