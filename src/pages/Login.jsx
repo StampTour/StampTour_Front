@@ -86,7 +86,8 @@ const Login = () => {
 			const urlParams = new URLSearchParams(
 				window.location.search
 			);
-			const stampId = urlParams.get("stampedId");
+			const stampId = urlParams.get("?stampedId");
+			alert(`${stampId}`);
 
 			if (stampId) {
 				// localStorage에 저장
