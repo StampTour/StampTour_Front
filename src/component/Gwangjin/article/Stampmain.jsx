@@ -13,10 +13,11 @@ import axios from "axios";
 
 const Stampmain = () => {
 	const navigation = useNavigate();
-	const [, setCookies, removeCookies] = useCookies([
+	const [cookies, setCookies, removeCookies] = useCookies([
 		"token",
-		"stampedidCookie",
+		"sessionId",
 	]);
+	const {sessionId} = cookies;
 	const [searchParams] = useSearchParams();
 	const stampedId = searchParams.get("stampedId");
 	const stampIdLocalStorage =
@@ -101,9 +102,7 @@ const Stampmain = () => {
 			const res = await axios.get(
 				"https://stamptour.xyz/api/userinfo",
 				{
-					headers: {
-						Authorization: `Bearer ${Ltoken}`,
-					},
+					withCredentials: true,
 				}
 			);
 			// console.log("유저 데이터 가져오기 성공: ", res.data);
@@ -147,9 +146,7 @@ const Stampmain = () => {
 				}`,
 				{},
 				{
-					headers: {
-						Authorization: `Bearer ${Ltoken}`,
-					},
+					withCredentials: true,
 				}
 			);
 			// console.log("QR 저장 성공!!!!: ", res);
@@ -167,7 +164,7 @@ const Stampmain = () => {
 	}, []);
 
 	useEffect(() => {
-		if (!Ltoken) {
+		if (!sessionId) {
 			navigation("/");
 			return;
 		}
@@ -188,7 +185,7 @@ const Stampmain = () => {
 
 	useEffect(() => {
 		// console.log("accessToken:", accessToken);
-		if (!Ltoken) {
+		if (!sessionId) {
 			setCookies("stampedidCookie", stampedId, {
 				path: "/",
 				sameSite: "None",
@@ -198,7 +195,7 @@ const Stampmain = () => {
 			localStorage.setItem("stampedId", stampedId);
 			navigation("/");
 		}
-	}, [Ltoken, stampedId]);
+	}, [sessionId, stampedId]);
 
 	const handleClick = (boothId) => {
 		setSelectedBoothId(boothId);

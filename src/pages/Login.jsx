@@ -5,9 +5,8 @@ import {useNavigate} from "react-router-dom";
 import {useCookies} from "react-cookie";
 
 const Login = () => {
-	const [, setCookies] = useCookies(["token"]);
+	const [, setCookies] = useCookies(["sessionId"]);
 	const [userid, setUserid] = useState("");
-	// const token = localStorage.getItem("token");
 	const navigate = useNavigate();
 
 	const getUserid = (e) => {
@@ -26,16 +25,22 @@ const Login = () => {
 					stampRequest: {
 						id: "",
 					},
+				},
+				{
+					withCredentials: true,
 				}
 			);
-			if (response.data.token) {
-				setCookies("token", response.data.token, {
+			console.log("로그인:", response);
+			if (response.status === 200) {
+				setCookies("sessionId", response.data.sessionId, {
 					path: "/",
 					sameSite: "None",
 					secure: true,
-					domain: process.env.REACT_APP_COOKIE_DOMAIN,
 				});
-				localStorage.setItem("token", response.data.token);
+				localStorage.setItem(
+					"sessionId",
+					response.data.sessionId
+				);
 				navigate("/Gwangjin");
 			} else {
 				console.error(
