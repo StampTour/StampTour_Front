@@ -187,7 +187,7 @@ const Stampmain = () => {
 				path: "/",
 				sameSite: "None",
 				secure: true,
-				domain: process.env.REACT_APP_COOKIE_DOMAIN,
+				// domain: process.env.REACT_APP_COOKIE_DOMAIN,
 			});
 			localStorage.setItem("stampedId", stampedId);
 			navigation("/");
@@ -199,11 +199,9 @@ const Stampmain = () => {
 		setVisible(!visible);
 	};
 
-	// useEffect(() => {
-	// 	console.log("boolean: ", boolean);
-	// 	console.log("userData: ", userData);
-	// 	console.log("booths: ", booths);
-	// }, [boolean, userData, stampedBooths]);
+	useEffect(() => {
+		console.log("JSESSIONID: ", JSESSIONID);
+	}, [JSESSIONID]);
 
 	const newBooth = booths.map((booth) => {
 		const isStamped = boolean[booth.id - 1]; // boolean 배열을 사용하여 상태 확인
