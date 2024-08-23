@@ -15,14 +15,13 @@ const Stampmain = () => {
 	const navigation = useNavigate();
 	const [cookies, setCookies, removeCookies] = useCookies([
 		"token",
-		"sessionId",
+		"JSESSIONID",
 	]);
-	const {sessionId} = cookies;
+	const {JSESSIONID} = cookies;
 	const [searchParams] = useSearchParams();
 	const stampedId = searchParams.get("stampedId");
 	const stampIdLocalStorage =
 		localStorage.getItem("stampedId");
-	const Ltoken = localStorage.getItem("token");
 	const booths = [
 		{
 			id: 1,
@@ -93,9 +92,7 @@ const Stampmain = () => {
 	const [boolean, setBoolean] = useState(
 		new Array(10).fill(false)
 	);
-	const [userData, setUserData] = useState();
-
-	const [stampedBooths] = useState([]);
+	const [, setUserData] = useState();
 
 	const getData = async () => {
 		try {
@@ -164,7 +161,7 @@ const Stampmain = () => {
 	}, []);
 
 	useEffect(() => {
-		if (!sessionId) {
+		if (!JSESSIONID) {
 			navigation("/");
 			return;
 		}
@@ -185,7 +182,7 @@ const Stampmain = () => {
 
 	useEffect(() => {
 		// console.log("accessToken:", accessToken);
-		if (!sessionId) {
+		if (!JSESSIONID) {
 			setCookies("stampedidCookie", stampedId, {
 				path: "/",
 				sameSite: "None",
@@ -195,7 +192,7 @@ const Stampmain = () => {
 			localStorage.setItem("stampedId", stampedId);
 			navigation("/");
 		}
-	}, [sessionId, stampedId]);
+	}, [JSESSIONID, stampedId]);
 
 	const handleClick = (boothId) => {
 		setSelectedBoothId(boothId);
