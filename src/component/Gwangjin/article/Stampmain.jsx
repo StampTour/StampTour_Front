@@ -15,9 +15,9 @@ const Stampmain = () => {
 	const navigation = useNavigate();
 	const [cookies, setCookies, removeCookies] = useCookies([
 		"token",
-		"JSESSIONID",
+		"id",
 	]);
-	const {JSESSIONID} = cookies;
+	const {id} = cookies;
 	const [searchParams] = useSearchParams();
 	const stampedId = searchParams.get("stampedId");
 	const stampIdLocalStorage =
@@ -97,12 +97,13 @@ const Stampmain = () => {
 	const getData = async () => {
 		try {
 			const res = await axios.get(
-				"https://stamptour.xyz/api/userinfo",
-				{
-					withCredentials: true,
-				}
+				"https://stamptour.xyz/api/userinfo"
+				// {
+				// 	withCredentials: true,
+				// }
 			);
-			// console.log("유저 데이터 가져오기 성공: ", res.data);
+
+			console.log("유저 데이터 가져오기 성공: ", res.data);
 
 			if (res.status === 200) {
 				setUserData(res.data);
@@ -141,10 +142,10 @@ const Stampmain = () => {
 						? stampedId
 						: stampIdLocalStorage
 				}`,
-				{},
-				{
-					withCredentials: true,
-				}
+				{}
+				// {
+				// 	withCredentials: true,
+				// }
 			);
 			// console.log("QR 저장 성공!!!!: ", res);
 			if (res.status === 200) {
@@ -161,7 +162,7 @@ const Stampmain = () => {
 	}, []);
 
 	useEffect(() => {
-		if (!JSESSIONID) {
+		if (!id) {
 			navigation("/");
 			return;
 		}
@@ -182,8 +183,8 @@ const Stampmain = () => {
 
 	useEffect(() => {
 		// console.log("accessToken:", accessToken);
-		if (!JSESSIONID) {
-			setCookies("stampedidCookie", stampedId, {
+		if (!id) {
+			setCookies("stampedIdCookie", stampedId, {
 				path: "/",
 				sameSite: "None",
 				secure: true,
@@ -192,7 +193,7 @@ const Stampmain = () => {
 			localStorage.setItem("stampedId", stampedId);
 			navigation("/");
 		}
-	}, [JSESSIONID, stampedId]);
+	}, [id, stampedId]);
 
 	const handleClick = (boothId) => {
 		setSelectedBoothId(boothId);
@@ -200,8 +201,8 @@ const Stampmain = () => {
 	};
 
 	useEffect(() => {
-		console.log("JSESSIONID: ", JSESSIONID);
-	}, [JSESSIONID]);
+		console.log("id: ", id);
+	}, [id]);
 
 	const newBooth = booths.map((booth) => {
 		const isStamped = boolean[booth.id - 1]; // boolean 배열을 사용하여 상태 확인

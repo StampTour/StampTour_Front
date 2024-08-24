@@ -5,7 +5,7 @@ import {useNavigate} from "react-router-dom";
 import {useCookies} from "react-cookie";
 
 const Login = () => {
-	const [, setCookies] = useCookies(["JSESSIONID"]);
+	const [, setCookies] = useCookies(["id"]);
 	const [userid, setUserid] = useState("");
 	const navigate = useNavigate();
 
@@ -32,11 +32,10 @@ const Login = () => {
 			);
 			console.log("로그인:", response);
 			if (response.status === 200) {
-				setCookies("JSESSIONID", response.data.sessionId, {
+				setCookies("id", response.data.sessionId, {
 					path: "/",
-					sameSite: "None",
-					secure: true,
-					domain: process.env.REACT_APP_COOKIE_DOMAIN,
+					// sameSite: "None",
+					// secure: true,
 				});
 				navigate("/Gwangjin");
 			} else {
