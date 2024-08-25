@@ -140,6 +140,7 @@ const Stampmain = () => {
 
 	const saveQRData = async () => {
 		try {
+			alert("저장된 스탬프 아이디 확인: ", stampedId);
 			const res = await axios.post(
 				`https://stamptour.xyz/api/savestamp?stampedId=${
 					stampedId !== null
