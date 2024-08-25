@@ -13,14 +13,13 @@ import axios from "axios";
 
 const Stampmain = () => {
 	const navigation = useNavigate();
-	const [, setCookies, removeCookies] = useCookies([
-		"token",
-		"JSESSIONID",
+	const [cookies, setCookies, removeCookies] = useCookies([
+		"stampedId",
+		"sessionId",
 	]);
 	const [searchParams] = useSearchParams();
 
-	//
-	const sessionId = localStorage.getItem("sessionId");
+	const {sessionId} = cookies;
 
 	// 스탬프 아이디
 	const stampedId = searchParams.get("stampedId");
@@ -140,12 +139,10 @@ const Stampmain = () => {
 
 	const saveQRData = async () => {
 		try {
-			alert("저장된 스탬프 아이디 확인: ", stampedId);
+			// alert("저장된 스탬프 아이디 확인: ", stampedId);
 			const res = await axios.post(
 				`https://stamptour.xyz/api/savestamp?stampedId=${
-					stampedId !== null
-						? stampedId
-						: stampIdLocalStorage
+					stampedId !== null ? stampedId : cookies.stampedId
 				}`,
 				{},
 				{
@@ -155,7 +152,7 @@ const Stampmain = () => {
 			// console.log("QR 저장 성공!!!!: ", res);
 			if (res.status === 200) {
 				getData();
-				removeCookies("stampedidCookie");
+				removeCookies("stampedId");
 			}
 		} catch (e) {
 			console.log("qr save error : ", e);
@@ -191,7 +188,7 @@ const Stampmain = () => {
 	useEffect(() => {
 		// console.log("accessToken:", accessToken);
 		if (!sessionId) {
-			setCookies("stampedIdCookie", stampedId, {
+			setCookies("stampedId", stampedId, {
 				path: "/",
 				sameSite: "None",
 				secure: true,

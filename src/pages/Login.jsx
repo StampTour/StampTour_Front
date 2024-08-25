@@ -2,9 +2,14 @@
 import React, {useState} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import {useCookies} from "react-cookie";
 
 const Login = () => {
 	const [userid, setUserid] = useState("");
+	const [, setCookies] = useCookies([
+		"stampedId",
+		"sessionId",
+	]);
 	const navigate = useNavigate();
 
 	const getUserid = (e) => {
@@ -30,15 +35,15 @@ const Login = () => {
 			);
 			console.log("로그인:", response);
 			if (response.status === 200) {
-				// setCookies("JSESSIONID", response.data.sessionId, {
-				// 	path: "/",
-				// 	// sameSite: "None",
-				// 	// secure: true,
-				// });
-				localStorage.setItem(
-					"sessionId",
-					response.data.sessionId
-				);
+				setCookies("sessionId", response.data.sessionId, {
+					path: "/",
+					sameSite: "None",
+					secure: true,
+				});
+				// localStorage.setItem(
+				// 	"sessionId",
+				// 	response.data.sessionId
+				// );
 				navigate("/Gwangjin");
 			} else {
 				console.error(
