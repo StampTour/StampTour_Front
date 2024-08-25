@@ -1,13 +1,12 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import {useCookies} from "react-cookie";
 
 const Login = () => {
-	const navigate = useNavigate();
+	const [, setCookies] = useCookies(["token"]);
 	const [userid, setUserid] = useState("");
-	const [, setCookies] = useCookies(["stampedId", "token"]);
+	const navigate = useNavigate();
 
 	const getUserid = (e) => {
 		setUserid(e.target.value);
@@ -26,18 +25,10 @@ const Login = () => {
 						id: "",
 					},
 				}
-				// {
-				// 	headers: {
-				// 		Authorization: `Bearer ${}`
-				// 	}
-				// }
 			);
-			console.log("로그인:", response);
 			if (response.status === 200) {
 				setCookies("token", response.data.token, {
 					path: "/",
-					sameSite: "None",
-					secure: true,
 				});
 				navigate("/Gwangjin");
 			} else {

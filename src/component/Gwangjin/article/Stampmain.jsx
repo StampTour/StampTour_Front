@@ -6,6 +6,20 @@ import {
 	useSearchParams,
 } from "react-router-dom";
 
+// img
+// import Before_AR_X from "public/img/Before_AR_X.svg";
+// import Before_Car_X from "public/img/Before_Car_X.svg";
+// import Before_Drone_X from "public/img/Before_Drone_X.svg";
+// import Before_Robot_X from "public/img/Before_Robot_X.svg";
+// import Before_VR_X from "public/img/img/Before_VR_X.svg";
+// import After_AR_O from "../../../../public/img/After_AR_O.svg";
+// import After_Car_O from "../../../../public/img/After_Car_O.svg";
+// import After_Drone_O from "../../../../public/img/After_Drone_O.svg";
+// import After_Vr_O from "../../../../public/img/After_Vr_O.svg";
+// import After_Robot_O from "../../../../public/img/After_Robot_O.svg";
+// import stampbasico from "../../../../public/img/stampbasico.png";
+// import stampbasicx from "../../../../public/img/stampbasicx.png";
+
 // constants
 import BoothInfo from "../article/BoothInfo";
 import {useCookies} from "react-cookie";
@@ -14,16 +28,12 @@ import axios from "axios";
 const Stampmain = () => {
 	const navigation = useNavigate();
 	const [cookies, setCookies, removeCookies] = useCookies([
-		"stampedId",
 		"token",
+		"stampedId",
 	]);
-	const [searchParams] = useSearchParams();
-
 	const {token} = cookies;
-
-	// 스탬프 아이디
+	const [searchParams] = useSearchParams();
 	const stampedId = searchParams.get("stampedId");
-
 	const booths = [
 		{
 			id: 1,
@@ -94,7 +104,9 @@ const Stampmain = () => {
 	const [boolean, setBoolean] = useState(
 		new Array(10).fill(false)
 	);
-	const [, setUserData] = useState();
+	const [userData, setUserData] = useState();
+
+	const [stampedBooths] = useState([]);
 
 	const getData = async () => {
 		try {
@@ -106,7 +118,6 @@ const Stampmain = () => {
 					},
 				}
 			);
-
 			console.log("유저 데이터 가져오기 성공: ", res.data);
 
 			if (res.status === 200) {
@@ -140,7 +151,8 @@ const Stampmain = () => {
 
 	const saveQRData = async () => {
 		try {
-			// alert("저장된 스탬프 아이디 확인: ", stampedId);
+			console.log("stampedId:", stampedId);
+			console.log("cookies.stampedId:", cookies.stampedId);
 			const res = await axios.post(
 				`https://stamptour.xyz/api/savestamp?stampedId=${
 					stampedId !== null ? stampedId : cookies.stampedId
@@ -152,7 +164,7 @@ const Stampmain = () => {
 					},
 				}
 			);
-			// console.log("QR 저장 성공!!!!: ", res);
+			console.log("QR 저장 성공!!!!: ", res);
 			if (res.status === 200) {
 				getData();
 				removeCookies("stampedId");
@@ -163,9 +175,7 @@ const Stampmain = () => {
 	};
 
 	useEffect(() => {
-		if (stampedId !== null) {
-			saveQRData();
-		}
+		saveQRData();
 	}, []);
 
 	useEffect(() => {
@@ -193,11 +203,7 @@ const Stampmain = () => {
 		if (!token) {
 			setCookies("stampedId", stampedId, {
 				path: "/",
-				sameSite: "None",
-				secure: true,
-				// domain: process.env.REACT_APP_COOKIE_DOMAIN,
 			});
-			localStorage.setItem("stampedId", stampedId);
 			navigation("/");
 		}
 	}, [token, stampedId]);
@@ -208,8 +214,10 @@ const Stampmain = () => {
 	};
 
 	useEffect(() => {
-		console.log("sessionId: ", token);
-	}, [token]);
+		console.log("boolean: ", boolean);
+		console.log("userData: ", userData);
+		console.log("booths: ", booths);
+	}, [boolean, userData, stampedBooths]);
 
 	const newBooth = booths.map((booth) => {
 		const isStamped = boolean[booth.id - 1]; // boolean 배열을 사용하여 상태 확인
