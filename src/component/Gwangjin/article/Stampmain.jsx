@@ -23,8 +23,7 @@ const Stampmain = () => {
 
 	// 스탬프 아이디
 	const stampedId = searchParams.get("stampedId");
-	const stampIdLocalStorage =
-		localStorage.getItem("stampedId");
+
 	const booths = [
 		{
 			id: 1,
