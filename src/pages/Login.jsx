@@ -32,11 +32,15 @@ const Login = () => {
 			);
 			console.log("로그인:", response);
 			if (response.status === 200) {
-				setCookies("id", response.data.sessionId, {
+				setCookies("JSESSIONID", response.data.sessionId, {
 					path: "/",
 					// sameSite: "None",
 					// secure: true,
 				});
+				localStorage.setItem(
+					"sessionId",
+					response.data.sessionId
+				);
 				navigate("/Gwangjin");
 			} else {
 				console.error(

@@ -15,9 +15,9 @@ const Stampmain = () => {
 	const navigation = useNavigate();
 	const [cookies, setCookies, removeCookies] = useCookies([
 		"token",
-		"id",
+		"JSESSIONID",
 	]);
-	const {id} = cookies;
+	const {JSESSIONID} = cookies;
 	const [searchParams] = useSearchParams();
 	const stampedId = searchParams.get("stampedId");
 	const stampIdLocalStorage =
@@ -97,10 +97,10 @@ const Stampmain = () => {
 	const getData = async () => {
 		try {
 			const res = await axios.get(
-				"https://stamptour.xyz/api/userinfo"
-				// {
-				// 	withCredentials: true,
-				// }
+				"https://stamptour.xyz/api/userinfo",
+				{
+					withCredentials: true,
+				}
 			);
 
 			console.log("유저 데이터 가져오기 성공: ", res.data);
@@ -142,10 +142,10 @@ const Stampmain = () => {
 						? stampedId
 						: stampIdLocalStorage
 				}`,
-				{}
-				// {
-				// 	withCredentials: true,
-				// }
+				{},
+				{
+					withCredentials: true,
+				}
 			);
 			// console.log("QR 저장 성공!!!!: ", res);
 			if (res.status === 200) {
@@ -162,7 +162,7 @@ const Stampmain = () => {
 	}, []);
 
 	useEffect(() => {
-		if (!id) {
+		if (!JSESSIONID) {
 			navigation("/");
 			return;
 		}
@@ -183,7 +183,7 @@ const Stampmain = () => {
 
 	useEffect(() => {
 		// console.log("accessToken:", accessToken);
-		if (!id) {
+		if (!JSESSIONID) {
 			setCookies("stampedIdCookie", stampedId, {
 				path: "/",
 				sameSite: "None",
@@ -193,7 +193,7 @@ const Stampmain = () => {
 			localStorage.setItem("stampedId", stampedId);
 			navigation("/");
 		}
-	}, [id, stampedId]);
+	}, [JSESSIONID, stampedId]);
 
 	const handleClick = (boothId) => {
 		setSelectedBoothId(boothId);
@@ -201,8 +201,8 @@ const Stampmain = () => {
 	};
 
 	useEffect(() => {
-		console.log("id: ", id);
-	}, [id]);
+		console.log("JSESSIONID: ", JSESSIONID);
+	}, [JSESSIONID]);
 
 	const newBooth = booths.map((booth) => {
 		const isStamped = boolean[booth.id - 1]; // boolean 배열을 사용하여 상태 확인
