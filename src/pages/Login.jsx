@@ -32,11 +32,11 @@ const Login = () => {
 			);
 			console.log("로그인:", response);
 			if (response.status === 200) {
-				setCookies("JSESSIONID", response.data.sessionId, {
-					path: "/",
-					// sameSite: "None",
-					// secure: true,
-				});
+				// setCookies("JSESSIONID", response.data.sessionId, {
+				// 	path: "/",
+				// 	// sameSite: "None",
+				// 	// secure: true,
+				// });
 				localStorage.setItem(
 					"sessionId",
 					response.data.sessionId

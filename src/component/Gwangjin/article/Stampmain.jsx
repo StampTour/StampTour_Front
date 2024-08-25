@@ -17,8 +17,12 @@ const Stampmain = () => {
 		"token",
 		"JSESSIONID",
 	]);
-	const {JSESSIONID} = cookies;
 	const [searchParams] = useSearchParams();
+
+	//
+	const sessionId = localStorage.getItem("sessionId");
+
+	// 스탬프 아이디
 	const stampedId = searchParams.get("stampedId");
 	const stampIdLocalStorage =
 		localStorage.getItem("stampedId");
@@ -162,7 +166,7 @@ const Stampmain = () => {
 	}, []);
 
 	useEffect(() => {
-		if (!JSESSIONID) {
+		if (!sessionId) {
 			navigation("/");
 			return;
 		}
@@ -183,7 +187,7 @@ const Stampmain = () => {
 
 	useEffect(() => {
 		// console.log("accessToken:", accessToken);
-		if (!JSESSIONID) {
+		if (!sessionId) {
 			setCookies("stampedIdCookie", stampedId, {
 				path: "/",
 				sameSite: "None",
@@ -193,7 +197,7 @@ const Stampmain = () => {
 			localStorage.setItem("stampedId", stampedId);
 			navigation("/");
 		}
-	}, [JSESSIONID, stampedId]);
+	}, [sessionId, stampedId]);
 
 	const handleClick = (boothId) => {
 		setSelectedBoothId(boothId);
@@ -201,8 +205,8 @@ const Stampmain = () => {
 	};
 
 	useEffect(() => {
-		console.log("JSESSIONID: ", JSESSIONID);
-	}, [JSESSIONID]);
+		console.log("sessionId: ", sessionId);
+	}, [sessionId]);
 
 	const newBooth = booths.map((booth) => {
 		const isStamped = boolean[booth.id - 1]; // boolean 배열을 사용하여 상태 확인
