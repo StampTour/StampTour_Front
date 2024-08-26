@@ -63,7 +63,9 @@ const Login = () => {
 			}
 		} catch (error) {
 			console.error("오류", error);
-			alert("전송실패!!");
+			alert(
+				"이미 존재하는 이름입니다! 다른 이름을 입력해주세요😂"
+			);
 		}
 	};
 
