@@ -4,12 +4,13 @@ import {useNavigate} from "react-router-dom";
 import {useCookies} from "react-cookie";
 
 const Login = () => {
+	const navigate = useNavigate();
 	const [, setCookies] = useCookies(["token"]);
 	const [userid, setUserid] = useState("");
 	const [password, setPassword] = useState("");
-	const navigate = useNavigate();
 	const [pwValid, setPWValid] = useState(false);
 	const [notAllow, setNotAllow] = useState(true);
+	const [warning, setWarning] = useState("");
 
 	useEffect(() => {
 		if (pwValid) {
@@ -54,7 +55,7 @@ const Login = () => {
 				setCookies("token", response.data.token, {
 					path: "/",
 				});
-				navigate("/Gwangjin");
+				navigate("/Yangcheon");
 			} else {
 				console.error(
 					"조건이 충족되지 않음",
@@ -63,7 +64,7 @@ const Login = () => {
 			}
 		} catch (error) {
 			console.error("오류", error);
-			alert(
+			setWarning(
 				"이미 존재하는 이름입니다! 다른 이름을 입력해주세요😂"
 			);
 		}
@@ -107,26 +108,35 @@ const Login = () => {
 						<input
 							onChange={getUserid}
 							value={userid}
-							className=' w-full bg-[#f9fafb] border-[1px] border-[#c2c8cf] rounded-[10px] mt-[5px] mb-[15px] px-[16px] py-[5px]'
+							className={`w-full bg-[#f9fafb] border-[1px] border-[#c2c8cf] rounded-[10px] ${
+								warning.length > 0 ? "" : "mb-[20px]"
+							} mt-[5px] px-[16px] py-[5px]`}
 							placeholder='이름을 입력해주세요!'
 							type='text'
 							required
 						/>
+						{warning.length > 0 && (
+							<div className='text-[13px] text-red-500 mb-[10px]'>
+								{warning}
+							</div>
+						)}
 					</div>
 					<div className='flex flex-col items-start'>
-						<label className='felx flex-col items-start text-[15px]'>
+						<label className='flex flex-col items-start text-[15px]'>
 							비밀번호
 						</label>
 						<input
 							onChange={getPassword}
 							value={password}
-							className=' w-full bg-[#f9fafb] border-[1px] border-[#c2c8cf] rounded-[10px] mt-[5px] px-[16px] py-[5px]'
+							className={`w-full bg-[#f9fafb] border-[1px] border-[#c2c8cf] rounded-[10px] ${
+								warning.length > 0 ? "" : "mb-[5px]"
+							} mt-[5px] px-[16px] py-[5px]`}
 							placeholder='비밀번호를 입력해주세요!'
 							type='text'
 							required
 						/>
 						{!pwValid && password.length > 0 && (
-							<div className='text-[12px] text-red-500 mt-[8px]'>
+							<div className='text-[13px] text-red-500'>
 								숫자 4개를 입력해주세요.
 							</div>
 						)}
@@ -135,8 +145,12 @@ const Login = () => {
 						<button
 							type='submit'
 							disabled={notAllow}
-							className='flex items-center justify-center w-full h-[43px] mt-[30px] rounded-[10px] bg-[#208df9] text-white font-medium drop-shadow-md
-							disabled:bg-[#F0F0F0] disabled:text-[black] disabled:drop-shadow-md'
+							className={`flex items-center justify-center w-full h-[43px] ${
+								warning.length > 0
+									? "mt-[30px]"
+									: "mt-[20px]"
+							} rounded-[10px] bg-[#208df9] text-white font-medium drop-shadow-md
+							disabled:bg-[#F0F0F0] disabled:text-[black] disabled:drop-shadow-md`}
 						>
 							스탬프 투어 시작 !
 						</button>
