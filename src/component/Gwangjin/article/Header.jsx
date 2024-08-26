@@ -17,9 +17,7 @@ const Header = () => {
 					alt=''
 				/>
 				<div className='Stampfont flex flex-col items-center text-[15px] text-[black]'>
-					<span className=''>
-						양천구 교육체험관을 경험하고
-					</span>
+					<span className=''>각 체험존을 경험하고</span>
 					<span>스탬프를 모두 모아보세요!</span>
 				</div>
 				<img
