@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import {useCookies} from "react-cookie";
@@ -6,10 +6,33 @@ import {useCookies} from "react-cookie";
 const Login = () => {
 	const [, setCookies] = useCookies(["token"]);
 	const [userid, setUserid] = useState("");
+	const [password, setPassword] = useState("");
 	const navigate = useNavigate();
+	const [pwValid, setPWValid] = useState(false);
+	const [notAllow, setNotAllow] = useState(true);
+
+	useEffect(() => {
+		if (pwValid) {
+			setNotAllow(false);
+			return;
+		}
+		setNotAllow(true);
+	}, [pwValid]);
 
 	const getUserid = (e) => {
 		setUserid(e.target.value);
+	};
+
+	const getPassword = (e) => {
+		setPassword(e.target.value);
+		const regex = /^\d{4}$/;
+		// const regex = /^\d{4,6}$/;
+
+		if (regex.test(e.target.value)) {
+			setPWValid(true);
+		} else {
+			setPWValid(false);
+		}
 	};
 
 	const onSubmit = async (e) => {
@@ -20,6 +43,7 @@ const Login = () => {
 				{
 					userRequest: {
 						userid: userid,
+						password: password,
 					},
 					stampRequest: {
 						id: "",
@@ -56,8 +80,10 @@ const Login = () => {
 							반갑습니다! 스탬프 투어에 오신걸 환영해요🥰
 						</span>
 						<span className='mb-[15px]'>
-							<b className='text-[#fe904c]'>닉네임</b>을
-							작성해주세요 !😀
+							<b className='text-[#fe904c]'>
+								이름과 비밀번호
+							</b>
+							를 작성해주세요!😀
 						</span>
 						<span className='mb-[3px]'>
 							※ 스탬프 투어 중 &nbsp;
@@ -67,27 +93,48 @@ const Login = () => {
 						</span>
 						<span className='mb-[3px]'>
 							<b className='text-[#fe904c]'>
-								처음에 입력했던 닉네임
+								처음에 입력했던 정보
 							</b>
-							을 다시 입력하면 됩니다!
+							를 입력해주세요!
 						</span>
 					</div>
 				</div>
 				<form className='Mainfont' onSubmit={onSubmit}>
-					<div className='flex flex-col items-center'>
+					<div className='flex flex-col items-start'>
+						<label className='text-[15px]'>이름</label>
 						<input
 							onChange={getUserid}
 							value={userid}
-							className='w-[90%] bg-[#f9fafb] border-[1px] border-[#c2c8cf] rounded-[10px] mt-[12px] mb-[30px] px-[16px] py-[10px]'
-							placeholder='닉네임을 입력해주세요 !'
+							className=' w-full bg-[#f9fafb] border-[1px] border-[#c2c8cf] rounded-[10px] mt-[5px] mb-[15px] px-[16px] py-[5px]'
+							placeholder='이름을 입력해주세요!'
 							type='text'
 							required
 						/>
 					</div>
+					<div className='flex flex-col items-start'>
+						<label className='felx flex-col items-start text-[15px]'>
+							비밀번호
+						</label>
+						<input
+							onChange={getPassword}
+							value={password}
+							className=' w-full bg-[#f9fafb] border-[1px] border-[#c2c8cf] rounded-[10px] mt-[5px] px-[16px] py-[5px]'
+							placeholder='비밀번호를 입력해주세요!'
+							type='text'
+							required
+						/>
+						{!pwValid && password.length > 0 && (
+							<div className='text-[12px] text-red-500 mt-[8px]'>
+								숫자 4개를 입력해주세요.
+							</div>
+						)}
+					</div>
 					<div className='flex flex-col items-center'>
 						<button
 							type='submit'
-							className='flex items-center justify-center w-[90%] h-[43px] rounded-[10px] bg-[#208df9] text-white font-medium'
+							disabled={notAllow}
+							className='flex items-center justify-center w-full h-[43px] mt-[30px] rounded-[10px] bg-[#208df9] text-white font-medium drop-shadow-md
+							disabled:bg-[#F0F0F0] disabled:text-[black] disabled:drop-shadow-md'
 						>
 							스탬프 투어 시작 !
 						</button>

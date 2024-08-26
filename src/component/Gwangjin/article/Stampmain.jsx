@@ -37,7 +37,7 @@ const Stampmain = () => {
 	const booths = [
 		{
 			id: 1,
-			name: "로봇 체험존1",
+			name: "로봇 체험존",
 			beforeSrc: "img/Before_Robot_X.svg",
 			afterSrc: "img/After_Robot_O.svg",
 		},
@@ -49,7 +49,7 @@ const Stampmain = () => {
 		},
 		{
 			id: 3,
-			name: "AR 체험존",
+			name: "코딩 체험존 ",
 			beforeSrc: "img/Before_AR_X.svg",
 			afterSrc: "img/After_AR_O.svg",
 		},
@@ -65,36 +65,36 @@ const Stampmain = () => {
 			beforeSrc: "img/Before_Car_X.svg",
 			afterSrc: "img/After_Car_O.svg",
 		},
-		{
-			id: 6,
-			name: "mission",
-			beforeSrc: "img/stampbasicx.png",
-			afterSrc: "img/stampbasico.png",
-		},
-		{
-			id: 7,
-			name: "mission",
-			beforeSrc: "img/stampbasicx.png",
-			afterSrc: "img/stampbasico.png",
-		},
-		{
-			id: 8,
-			name: "mission",
-			beforeSrc: "img/stampbasicx.png",
-			afterSrc: "img/stampbasico.png",
-		},
-		{
-			id: 9,
-			name: "mission",
-			beforeSrc: "img/stampbasicx.png",
-			afterSrc: "img/stampbasico.png",
-		},
-		{
-			id: 10,
-			name: "mission",
-			beforeSrc: "img/stampbasicx.png",
-			afterSrc: "img/stampbasico.png",
-		},
+		// {
+		// 	id: 6,
+		// 	name: "mission",
+		// 	beforeSrc: "img/stampbasicx.png",
+		// 	afterSrc: "img/stampbasico.png",
+		// },
+		// {
+		// 	id: 7,
+		// 	name: "mission",
+		// 	beforeSrc: "img/stampbasicx.png",
+		// 	afterSrc: "img/stampbasico.png",
+		// },
+		// {
+		// 	id: 8,
+		// 	name: "mission",
+		// 	beforeSrc: "img/stampbasicx.png",
+		// 	afterSrc: "img/stampbasico.png",
+		// },
+		// {
+		// 	id: 9,
+		// 	name: "mission",
+		// 	beforeSrc: "img/stampbasicx.png",
+		// 	afterSrc: "img/stampbasico.png",
+		// },
+		// {
+		// 	id: 10,
+		// 	name: "mission",
+		// 	beforeSrc: "img/stampbasicx.png",
+		// 	afterSrc: "img/stampbasico.png",
+		// },
 	];
 
 	const [visible, setVisible] = useState(false);
@@ -102,7 +102,7 @@ const Stampmain = () => {
 		useState(null);
 
 	const [boolean, setBoolean] = useState(
-		new Array(10).fill(false)
+		new Array(5).fill(false)
 	);
 	const [userData, setUserData] = useState();
 
@@ -122,7 +122,7 @@ const Stampmain = () => {
 
 			if (res.status === 200) {
 				setUserData(res.data);
-				const qrArray = new Array(10).fill(false);
+				const qrArray = new Array(5).fill(false);
 
 				// qr 값 탐색 후 배열에 저장
 				Object.keys(res.data).forEach((key) => {
@@ -187,7 +187,7 @@ const Stampmain = () => {
 		getData();
 
 		if (stampedId) {
-			const id = parseInt(stampedId, 10);
+			const id = parseInt(stampedId, 5);
 			setBoolean((prevBoolean) => {
 				let newArray = [...prevBoolean];
 				newArray[id - 1] = true; // 인덱스는 0부터 시작하므로 id-1 사용
